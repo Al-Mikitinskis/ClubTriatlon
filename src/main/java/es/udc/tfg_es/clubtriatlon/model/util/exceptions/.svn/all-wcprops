@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/ei5/is/is/!svn/ver/1/pojo-examples/trunk/pojo-modelutil/src/main/java/es/udc/pojo/modelutil/exceptions
+END
+InstanceNotFoundException.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/ei5/is/is/!svn/ver/1/pojo-examples/trunk/pojo-modelutil/src/main/java/es/udc/pojo/modelutil/exceptions/InstanceNotFoundException.java
+END
+InstanceException.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/ei5/is/is/!svn/ver/1/pojo-examples/trunk/pojo-modelutil/src/main/java/es/udc/pojo/modelutil/exceptions/InstanceException.java
+END
+DuplicateInstanceException.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/ei5/is/is/!svn/ver/1/pojo-examples/trunk/pojo-modelutil/src/main/java/es/udc/pojo/modelutil/exceptions/DuplicateInstanceException.java
+END

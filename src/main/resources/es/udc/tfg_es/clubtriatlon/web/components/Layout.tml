@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+	  xmlns:p="tapestry:parameter">
+
+<head>
+	<title>${pageTitle}</title>
+	<link rel="StyleSheet" href="${context:/css/styles.css}"
+		  type="text/css" media="all"/>
+</head>
+
+<body>
+
+<!-- Window. -->
+
+<div id="window">
+
+<!-- Page title. -->
+
+<div id="pageTitle">
+	<div align="center">
+       ${message:header}
+	</div>
+</div>
+
+<!-- Menu. -->
+
+<div id="menu">
+	<span id="menuWelcome">
+  		<t:if test="userSession">
+ 			${message:menu-hello} ${userSession.firstName}
+            <p:else>
+            	${message:menu-welcome}
+            </p:else>
+		</t:if>
+    </span>
+    <t:if test="menuExplanation">
+	 	<span id="menuExplanation">
+ 		  -  ${menuExplanation}
+ 		</span>
+        <p:else></p:else>
+ 	</t:if>
+</div>
+
+<table  width="100%" >
+<tr >
+
+<!-- Sidebar. -->
+
+<td valign="top" id="sidebar" width="15%" >
+
+  	<ul>
+	<li>
+		<a href="#" id="selectLanguage" t:type="PageLink" t:page="SelectLanguage">
+			${message:sidebar-selectLanguage}
+		</a>
+	</li>
+	<t:if test="userSession"> 
+			<li>
+			    <a href="#" id="updateProfile" t:type="PageLink" t:page="user/UpdateProfile">
+			    	${message:sidebar-updateProfile}</a>
+			</li>
+			<li>   	
+				<a href="#" id="logout" t:type="ActionLink" t:id="logout">
+					${message:sidebar-logout}</a>
+			</li>
+	<p:else>
+			<li>   	
+				<a href="#" id="autenticarse" t:type="PageLink" t:page="user/Login">
+					${message:sidebar-authenticate}</a>
+			</li>
+	</p:else>
+	</t:if>
+  	</ul>
+</td>
+
+<!-- Content. -->
+
+<td id="content" width="85%" >
+
+<div >
+	<div align="center">
+  		<t:body/>
+  	</div>
+</div>
+</td>
+</tr>
+</table>
+
+<!-- Body footer. -->
+
+<div id="footer">
+    <div align="center">
+       ${message:footer}
+    </div>
+</div>
+
+<!-- End of "window" id. -->
+
+</div>
+
+<!-- End of HTML body. -->
+
+</body>
+
+</html>

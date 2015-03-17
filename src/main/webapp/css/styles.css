@@ -1,0 +1,184 @@
+/* Body. */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    margin: 10px 20px; /* left should be bigger by the scroll */
+    background-color: #bdbfb2;
+    height: 98%;
+    width: 98%;
+}
+
+/* Links. */
+
+a {
+    font-weight: bold;
+    text-decoration: none;
+    color: #65a600;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Window. */
+
+#window {    
+    border: #000 1px solid;
+    background-color: #fff;
+    padding: 6px;
+    width: 98%;
+}
+
+/* Page title. */
+
+#pageTitle {
+    background-color: #121212;    
+    color: #8cd21f;
+    text-align: center;
+    font-weight: bold;
+    padding: 15px 7.5px 15px 5px;
+    width: 99%;
+}
+
+/* Menu. */
+
+#menu {
+    background-color: #484845;
+    color: #8cd21f;
+    text-align: left;
+    padding: 5px 7.5px 5px 5px;
+    width: 99%;
+}
+
+#menuWelcome {
+    font-weight: bold;
+}
+
+#menuLinks a {
+    color : #fffac6;
+}
+
+/* Sidebar. */
+
+#sidebar {
+    background-color: #484845;
+}
+
+#sidebar a {
+    display:block;
+    font-weight:bold;
+    color : #8cd21f;
+    text-align: center;
+}
+#sidebar a:hover {
+    background-color:#121212
+}
+
+#sidebar ul {
+    list-style: none;
+    padding-top: 5px;
+    /* Hack for correct indentation (the following three lines). */
+    margin-left: 0;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    text-indent: -1em;
+}
+
+#sidebar li {
+    padding: 0 0 5px 5px;
+}
+
+
+/* Content. */
+
+#content {
+    padding-top: 20px;
+    float: center;    
+    text-align: center;
+    width: 100%;
+    background-color:#FFFFFF;
+
+}
+
+p.welcome {
+    font-size: 16px;
+}
+
+/* Forms. */
+
+form {
+    width: 100%;
+}
+
+div.field {
+    clear: both;
+    padding-top: 1em;
+    width: 100%;
+}
+
+div.field label {
+    float: left;    
+    text-align: right;
+    font-weight: bold;
+    width: 49.5%;
+}
+
+div.field span.entry {
+    float: right;    
+    text-align: left;
+    width: 49.5%;
+}
+
+div.button {
+    clear: both;
+    padding-top: 1em;
+    text-align: center;
+    width: 100%;
+}
+
+input, select, textarea  {
+    background-color: #f4f4f4;
+}
+
+/* Error messages. */
+
+div.t-error ul {
+    font-weight: bold;
+}
+
+/* Footer. */
+
+#footer {
+    clear: both;
+    text-align: center;
+    margin-top: 5px;
+    padding-top: 5px;
+    border-top: #000 1px solid; 
+    width: 100%;
+}
+
+table {
+    border-collapse:collapse;
+}
+
+table th {
+    background:#ffe39f;
+    color:#fffac6
+}
+
+table tr:nth-child(odd) td {
+    background:#ffe39f;
+}
+
+table tr:nth-child(even) td {
+    background:#FFFFFF;
+}
+
+table td {
+    text-align: center;
+}
+
+#container tr {
+    background:#ffffff;
+}
