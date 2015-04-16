@@ -35,7 +35,7 @@ public class UserServiceTest {
         // Register user and find profile.
         UserProfile userProfile = userService.registerUser(
             "user", "userPassword",
-            new UserProfileDetails("name", "lastName", "user@udc.es","anyRoad","3A",89910));
+            new UserProfileDetails("name", "1980/01/23", 601601601, "account"));
 
         UserProfile userProfile2 = userService.findUserProfile(
             userProfile.getUserProfileId());
@@ -49,15 +49,15 @@ public class UserServiceTest {
     public void testRegisterDuplicatedUser() throws DuplicateInstanceException,
         InstanceNotFoundException {
 
-        String loginName = "user";
+        String email = "user";
         String clearPassword = "userPassword";
-        UserProfileDetails userProfileDetails = new UserProfileDetails(
-            "name", "lastName", "user@udc.es","anyRoad","3A",89910);
+        UserProfileDetails userProfileDetails = 
+        		new UserProfileDetails("name", "1980/01/23", 601601601, "account");
 
-        userService.registerUser(loginName, clearPassword,
+        userService.registerUser(email, clearPassword,
             userProfileDetails);
 
-        userService.registerUser(loginName, clearPassword,
+        userService.registerUser(email, clearPassword,
             userProfileDetails);
 
     }
@@ -69,7 +69,7 @@ public class UserServiceTest {
         String clearPassword = "userPassword";
         UserProfile userProfile = registerUser("user", clearPassword);
 
-        UserProfile userProfile2 = userService.login(userProfile.getLoginName(),
+        UserProfile userProfile2 = userService.login(userProfile.getEmail(),
             clearPassword, false);
 
         assertEquals(userProfile, userProfile2);
@@ -82,7 +82,7 @@ public class UserServiceTest {
 
         UserProfile userProfile = registerUser("user", "clearPassword");
 
-        UserProfile userProfile2 = userService.login(userProfile.getLoginName(),
+        UserProfile userProfile2 = userService.login(userProfile.getEmail(),
             userProfile.getEncryptedPassword(), true);
 
         assertEquals(userProfile, userProfile2);
@@ -96,7 +96,7 @@ public class UserServiceTest {
         String clearPassword = "userPassword";
         UserProfile userProfile = registerUser("user", clearPassword);
 
-        userService.login(userProfile.getLoginName(), 'X' + clearPassword,
+        userService.login(userProfile.getEmail(), 'X' + clearPassword,
              false);
 
     }
@@ -125,23 +125,22 @@ public class UserServiceTest {
         UserProfile userProfile = registerUser("user", clearPassword);
 
         UserProfileDetails newUserProfileDetails = new UserProfileDetails(
-            'X' + userProfile.getFirstName(), 'X' + userProfile.getLastName(),
-            'X' + userProfile.getEmail(), 'X' + userProfile.getRoad(), 'X' + userProfile.getNum(), 40034);
+            "name", "1980/01/23", 601601601, "account");
 
         userService.updateUserProfileDetails(userProfile.getUserProfileId(),
             newUserProfileDetails);
 
         // Check changes.
-        userService.login(userProfile.getLoginName(), clearPassword, false);
+        userService.login(userProfile.getEmail(), clearPassword, false);
         UserProfile userProfile2 = userService.findUserProfile(
             userProfile.getUserProfileId());
 
-        assertEquals(newUserProfileDetails.getFirstName(),
-            userProfile2.getFirstName());
-        assertEquals(newUserProfileDetails.getLastName(),
-            userProfile2.getLastName());
-        assertEquals(newUserProfileDetails.getEmail(),
-            userProfile2.getEmail());
+        assertEquals(newUserProfileDetails.getName(),
+            userProfile2.getName());
+        assertEquals(newUserProfileDetails.getBirthDate(),
+            userProfile2.getBirthDate());
+        assertEquals(newUserProfileDetails.getPhoneNumber(),
+            userProfile2.getPhoneNumber());
 
     }
 
@@ -150,7 +149,7 @@ public class UserServiceTest {
             throws InstanceNotFoundException {
 
         userService.updateUserProfileDetails(NON_EXISTENT_USER_PROFILE_ID,
-            new UserProfileDetails("name", "lastName", "user@udc.es","anyRoad","3A",89910));
+            new UserProfileDetails("name", "1980/01/23", 601601601, "account"));
 
     }
 
@@ -167,7 +166,7 @@ public class UserServiceTest {
             clearPassword, newClearPassword);
 
         // Check new password.
-        userService.login(userProfile.getLoginName(), newClearPassword, false);
+        userService.login(userProfile.getEmail(), newClearPassword, false);
 
     }
 
@@ -192,15 +191,15 @@ public class UserServiceTest {
 
     }
 
-    private UserProfile registerUser(String loginName, String clearPassword) {
+    private UserProfile registerUser(String email, String clearPassword) {
 
         UserProfileDetails userProfileDetails = new UserProfileDetails(
-            "name", "lastName", "user@udc.es","anyRoad","3A", 89910);
+            "name", "1980/01/23", 89910, "account");
 
         try {
 
             return userService.registerUser(
-                loginName, clearPassword, userProfileDetails);
+                email, clearPassword, userProfileDetails);
 
         } catch (DuplicateInstanceException e) {
             throw new RuntimeException(e);

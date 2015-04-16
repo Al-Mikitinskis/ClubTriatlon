@@ -6,39 +6,33 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Version;
 
 @Entity
 public class UserProfile {
 
 	private Long   userProfileId;
-	private String loginName;
-	private String encryptedPassword;
-	private String firstName;
-	private String lastName;
 	private String email;
-	private String road;
-	private String num;
-	private int    postalCode;
-	private long   version;
+	private String encryptedPassword;
+	private String name;
+	private String birthDate;
+	private int    phoneNumber;
+	private String account;
 
 	public UserProfile() {
 	}
 
-	public UserProfile(String loginName, String encryptedPassword, String firstName,
-			 String lastName, String email, String road, String num, int postalCode) {
+	public UserProfile(String email, String encryptedPassword, String name,
+			String birthDate, int phoneNumber, String account) {
 		
 		/* NOTE: "userProfileId" *must* be left as "null" since its value is
 		 * automatically generated. */
 		
-		this.loginName         = loginName;
-		this.encryptedPassword = encryptedPassword;
-		this.firstName         = firstName;
-		this.lastName          = lastName;
 		this.email             = email;
-		this.road              = road;
-		this.num               = num;
-		this.postalCode        = postalCode;
+		this.encryptedPassword = encryptedPassword;
+		this.name              = name;
+		this.birthDate         = birthDate;
+		this.phoneNumber       = phoneNumber;
+		this.account           = account;
 	}
 
 	@Column(name = "usrId")
@@ -56,12 +50,12 @@ public class UserProfile {
 		this.userProfileId = userProfileId;
 	}
 
-	public String getLoginName() {
-		return loginName;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setLoginName(String loginName) {
-		this.loginName = loginName;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	@Column(name = "enPassword")
@@ -73,70 +67,44 @@ public class UserProfile {
 		this.encryptedPassword = encryptedPassword;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getName() {
+		return name;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getBirthDate() {
+		return birthDate;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public void setBirthDate(String birthDate) {
+		this.birthDate = birthDate;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public int getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public String getEmail() {
-		return email;
+	public void setPhoneNumber(int phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public String getAccount() {
+		return account;
 	}
 
-	@Version
-	public long getVersion() {
-		return version;
-	}
-
-	public void setVersion(long version) {
-		this.version = version;
-	}
-
-	public String getRoad() {
-		return road;
-	}
-
-	public void setRoad(String road) {
-		this.road = road;
-	}
-
-	public String getNum() {
-		return num;
-	}
-
-	public void setNum(String number) {
-		this.num = number;
-	}
-
-	public int getPostalCode() {
-		return postalCode;
-	}
-
-	public void setPostalCode(int postalCode) {
-		this.postalCode = postalCode;
+	public void setAccount(String account) {
+		this.account = account;
 	}
 
 	@Override
 	public String toString() {
-		return "UserProfile [userProfileId=" + userProfileId + ", loginName="
-				+ loginName + ", encryptedPassword=" + encryptedPassword
-				+ ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", email=" + email + ", road=" + road + ", num=" + num
-				+ ", postalCode=" + postalCode + "]";
+		return "UserProfile [userProfileId=" + userProfileId + ", email="
+				+ email + ", encryptedPassword=" + encryptedPassword
+				+ ", name=" + name + ", birthDate=" + birthDate
+				+ ", phoneNumber=" + phoneNumber + ", account=" + account + "]";
 	}
 
 }

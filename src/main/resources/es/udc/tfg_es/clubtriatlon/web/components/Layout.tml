@@ -30,7 +30,7 @@
 <div id="menu">
 	<span id="menuWelcome">
   		<t:if test="userSession">
- 			${message:menu-hello} ${userSession.firstName}
+ 			${message:menu-hello} ${userSession.name}
             <p:else>
             	${message:menu-welcome}
             </p:else>
@@ -57,18 +57,18 @@
 			${message:sidebar-selectLanguage}
 		</a>
 	</li>
-	<t:if test="userSession"> 
-			<li>
-			    <a href="#" id="updateProfile" t:type="PageLink" t:page="user/UpdateProfile">
-			    	${message:sidebar-updateProfile}</a>
-			</li>
+	<t:if test="userSession">
+		<t:security.hasrole role="admin">
+			<li><a href="#" id="planning" t:type="PageLink" t:page="admin/Planning">
+					Admin Plannings</a></li>
+		</t:security.hasrole>
 			<li>   	
 				<a href="#" id="logout" t:type="ActionLink" t:id="logout">
 					${message:sidebar-logout}</a>
 			</li>
 	<p:else>
 			<li>   	
-				<a href="#" id="autenticarse" t:type="PageLink" t:page="user/Login">
+				<a href="#" id="autenticarse" t:type="PageLink" t:page="Login">
 					${message:sidebar-authenticate}</a>
 			</li>
 	</p:else>

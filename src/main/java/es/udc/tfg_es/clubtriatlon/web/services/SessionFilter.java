@@ -50,7 +50,7 @@ public class SessionFilter implements RequestFilter {
 						UserSession userSession = new UserSession();
 						userSession.setUserProfileId(userProfile
 								.getUserProfileId());
-						userSession.setFirstName(userProfile.getFirstName());
+						userSession.setName(userProfile.getName());
 						applicationStateManager.set(UserSession.class,
 								userSession);
 

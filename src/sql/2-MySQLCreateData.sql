@@ -1,11 +1,30 @@
 -- ----------------------------------------------------------------------------
--- Put here INSERT statements for inserting data required by the application
--- in the "pojo" database.
+-- Put here INSERT statements for inserting data required by the application.
 -------------------------------------------------------------------------------
 
-Delete from UserProfile;
+DELETE FROM Role;
+DELETE FROM UserProfile;
 
--- ----------------- UserProfile ----------------------------------------------
+-- UserProfile ----------------------------------------------------------------
+-- Passwords ==> 'admin' = 'BLaNeeniglZgQ' 'user' = 'ABsFuZ3PufkXY'
 
-Insert into UserProfile (usrId, loginName, enPassword, firstName, lastName, road, num, postalCode, email, version) values (1, 'mmi', 'JKQWref7fmsOg', 'Miguel', 'de Cervantes', 'c/ Don Quijote', '5B', 15008,'migueldecervantes@gmail.com', 1);
-Insert into UserProfile (usrId, loginName, enPassword, firstName, lastName, road, num, postalCode, email, version) values (2, 'aao', 'NAlLc2Tm4P21M', 'Antonio', 'Alcantara Cuentame', 'c/ Real', '29B', 15008, 'Antonio@gmail.com', 1);
+INSERT INTO UserProfile (usrId, email, enPassword, name, birthDate, phoneNumber, account) 
+VALUES (1, 'admin2@triatlon.com', 'BLaNeeniglZgQ', 'Administrador1', '1975/01/23', 601601601, '0049005203650360');
+INSERT INTO UserProfile (usrId, email, enPassword, name, birthDate, phoneNumber, account) 
+VALUES (2, 'admin1@triatlon.com', 'BLaNeeniglZgQ', 'Administrador2', '1977/03/19', 633622611, '0049005201177908');
+INSERT INTO UserProfile (usrId, email, enPassword, name, birthDate, phoneNumber, account) 
+VALUES (3, 'user1A@gmail.com', 'ABsFuZ3PufkXY', 'Usuario 1A', '1979/07/15', 666000258, '0049005202540258');
+INSERT INTO UserProfile (usrId, email, enPassword, name, birthDate, phoneNumber, account) 
+VALUES (4, 'user2B@gmail.com', 'ABsFuZ3PufkXY', 'Usuario 2B', '1983/03/22', 666210210, '0049005225747471');
+INSERT INTO UserProfile (usrId, email, enPassword, name, birthDate, phoneNumber, account) 
+VALUES (5, 'user3C@gmail.com', 'ABsFuZ3PufkXY', 'Usuario 3C', '1991/02/03', 667557447, '0049005200025883');
+
+-- Role -----------------------------------------------------------------------
+
+INSERT INTO Role (name, userId) VALUES ('admin', 1);
+INSERT INTO Role (name, userId) VALUES ('admin', 2);
+INSERT INTO Role (name, userId) VALUES ('user',  3);
+INSERT INTO Role (name, userId) VALUES ('user',  4);
+INSERT INTO Role (name, userId) VALUES ('user',  5);
+
+

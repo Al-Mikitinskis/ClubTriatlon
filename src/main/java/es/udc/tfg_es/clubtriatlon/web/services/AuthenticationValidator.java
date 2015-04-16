@@ -9,7 +9,7 @@ import es.udc.tfg_es.clubtriatlon.web.util.UserSession;
 
 public class AuthenticationValidator {
 
-	private final static String LOGIN_PAGE = "user/Login";
+	private final static String LOGIN_PAGE = "Login";
 
 	private final static String INIT_PAGE = "Index";
 

@@ -10,7 +10,7 @@ public class IncorrectPasswordException extends Exception {
         this.loginName = loginName;
     }
 
-    public String getLoginName() {
+    public String getEmail() {
         return loginName;
     }
 

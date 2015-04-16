@@ -26,6 +26,7 @@
         
         <!--  List of persistent classes -->
         <mapping class="es.udc.tfg_es.clubtriatlon.model.userprofile.UserProfile" />
+        <mapping class="es.udc.tfg_es.clubtriatlon.model.role.Role" />
     
     </session-factory>
 </hibernate-configuration>

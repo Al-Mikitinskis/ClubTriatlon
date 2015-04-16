@@ -1,6 +1,7 @@
 package es.udc.tfg_es.clubtriatlon.test.experiments;
 
 import static es.udc.tfg_es.clubtriatlon.model.util.GlobalNames.SPRING_CONFIG_FILE;
+import static es.udc.tfg_es.clubtriatlon.model.util.GlobalNames.SPRING_SECURITY_CONFIG_FILE;
 import static es.udc.tfg_es.clubtriatlon.test.util.GlobalNames.SPRING_CONFIG_TEST_FILE;
 
 import org.springframework.context.ApplicationContext;
@@ -19,14 +20,14 @@ public class UserServiceExperiments {
 
 		/* Get service object. */
 		ApplicationContext ctx = new ClassPathXmlApplicationContext(
-				new String[] { SPRING_CONFIG_FILE, SPRING_CONFIG_TEST_FILE });
+				new String[] { SPRING_CONFIG_FILE, SPRING_SECURITY_CONFIG_FILE, SPRING_CONFIG_TEST_FILE });
 		UserService userService = ctx.getBean(UserService.class);
 
 		try {
 			// Register user.
 			UserProfile userProfile = userService.registerUser("serviceUser",
-					"userPassword", new UserProfileDetails("name", "lastName",
-							"user@udc.es","anyRoad","3A", 89910));
+					"userPassword", new UserProfileDetails("name", "1980/01/23",
+							601601601, "account"));
 			System.out.println("User with userId '"
 					+ userProfile.getUserProfileId() + "' has been created");
 			System.out.println(userProfile);

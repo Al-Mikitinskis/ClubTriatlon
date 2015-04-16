@@ -8,8 +8,8 @@ public interface UserProfileDao extends GenericDao<UserProfile, Long>{
     /**
      * Returns an UserProfile by login name (not user identifier)
      *
-     * @param loginName the user identifier
+     * @param email the user identifier
      * @return the UserProfile
      */
-    public UserProfile findByLoginName(String loginName) throws InstanceNotFoundException;
+    public UserProfile findByEmail(String email) throws InstanceNotFoundException;
 }

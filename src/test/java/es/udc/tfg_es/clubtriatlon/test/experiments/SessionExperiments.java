@@ -18,7 +18,7 @@ public class SessionExperiments {
 			// Register user.
 			UserProfile userProfile = new UserProfile("sessionUser",
 					PasswordEncrypter.crypt("userPassword"), "name",
-					"lastName", "user@udc.es", "road", "number", 0);
+					"1980/01/23", 601601601, "account");
 			session.saveOrUpdate(userProfile);
 			Long userId = userProfile.getUserProfileId();
 			System.out.println("User with userId '" + userId

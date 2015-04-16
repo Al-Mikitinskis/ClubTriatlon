@@ -6,11 +6,11 @@ import es.udc.tfg_es.clubtriatlon.model.util.exceptions.InstanceNotFoundExceptio
 
 public interface UserService {
 
-    public UserProfile registerUser(String loginName, String clearPassword,
+    public UserProfile registerUser(String email, String clearPassword,
             UserProfileDetails userProfileDetails)
             throws DuplicateInstanceException;
 
-    public UserProfile login(String loginName, String password,
+    public UserProfile login(String email, String password,
             boolean passwordIsEncrypted) throws InstanceNotFoundException,
             IncorrectPasswordException;
 
@@ -24,5 +24,9 @@ public interface UserService {
     public void changePassword(Long userProfileId, String oldClearPassword,
             String newClearPassword) throws IncorrectPasswordException,
             InstanceNotFoundException;
+    
+    public UserProfile findUserProfileByEmail(String email) throws InstanceNotFoundException;
+    
+    public String getRoleNameByUserEmail(String email) throws InstanceNotFoundException;
 
 }

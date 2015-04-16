@@ -1,5 +1,9 @@
-package es.udc.tfg_es.clubtriatlon.web.pages.user;
+package es.udc.tfg_es.clubtriatlon.web.pages;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.*;
+import org.apache.shiro.subject.Subject;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SessionState;
@@ -11,7 +15,6 @@ import org.apache.tapestry5.services.Cookies;
 import es.udc.tfg_es.clubtriatlon.model.userprofile.UserProfile;
 import es.udc.tfg_es.clubtriatlon.model.userservice.IncorrectPasswordException;
 import es.udc.tfg_es.clubtriatlon.model.userservice.UserService;
-import es.udc.tfg_es.clubtriatlon.web.pages.Index;
 import es.udc.tfg_es.clubtriatlon.web.services.AuthenticationPolicy;
 import es.udc.tfg_es.clubtriatlon.web.services.AuthenticationPolicyType;
 import es.udc.tfg_es.clubtriatlon.web.util.CookiesManager;
@@ -22,7 +25,7 @@ import es.udc.tfg_es.clubtriatlon.model.util.exceptions.InstanceNotFoundExceptio
 public class Login {
 
     @Property
-    private String loginName;
+    private String email;
 
     @Property
     private String password;
@@ -55,25 +58,36 @@ public class Login {
         }
 
         try {
-            userProfile = userService.login(loginName, password, false);
+            userProfile = userService.login(email, password, false);
         } catch (InstanceNotFoundException e) {
             loginForm.recordError(messages.get("error-authenticationFailed"));
         } catch (IncorrectPasswordException e) {
             loginForm.recordError(messages.get("error-authenticationFailed"));
         }
-
     }
 
     Object onSuccess() {
 
     	userSession = new UserSession();
         userSession.setUserProfileId(userProfile.getUserProfileId());
-        userSession.setFirstName(userProfile.getFirstName());
+        userSession.setName(userProfile.getName());
 
         if (rememberMyPassword) {
-            CookiesManager.leaveCookies(cookies, loginName, userProfile
+            CookiesManager.leaveCookies(cookies, email, userProfile
                     .getEncryptedPassword());
         }
+        
+        // **login de Shiro**
+        //Auntentico al usuario, necesario para la autorización (roles) de páginas
+        //comprobará Subject.isAuthenticated() antes de ver si tiene autorización
+        UsernamePasswordToken token =
+         		 new UsernamePasswordToken(userProfile.getEmail(), userProfile.getEncryptedPassword());
+        Subject currentUser = SecurityUtils.getSubject();
+        //token.setRememberMe(true): Por lo que entiendo, si no lo pongo y voy a otra página después de login
+        //es como si no recordara el Subject... y cada vez que haga Subject.isAuthenticated() dirá que es anónimo
+        token.setRememberMe(true);
+        currentUser.login(token);
+
         return Index.class;
 
     }

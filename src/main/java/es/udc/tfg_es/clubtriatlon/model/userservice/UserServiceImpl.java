@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import es.udc.tfg_es.clubtriatlon.model.role.RoleDao;
 import es.udc.tfg_es.clubtriatlon.model.userprofile.UserProfile;
 import es.udc.tfg_es.clubtriatlon.model.userprofile.UserProfileDao;
 import es.udc.tfg_es.clubtriatlon.model.userservice.util.PasswordEncrypter;
@@ -16,25 +17,27 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserProfileDao userProfileDao;
+    
+    @Autowired
+    private RoleDao roleDao;
 
-    public UserProfile registerUser(String loginName, String clearPassword,
+    public UserProfile registerUser(String email, String clearPassword,
             UserProfileDetails userProfileDetails)
             throws DuplicateInstanceException {
 
         try {
-            userProfileDao.findByLoginName(loginName);
-            throw new DuplicateInstanceException(loginName,
+            userProfileDao.findByEmail(email);
+            throw new DuplicateInstanceException(email,
                     UserProfile.class.getName());
         } catch (InstanceNotFoundException e) {
             String encryptedPassword = PasswordEncrypter.crypt(clearPassword);
 
-            UserProfile userProfile = new UserProfile(loginName,
-                    encryptedPassword, userProfileDetails.getFirstName(),
-                    userProfileDetails.getLastName(), userProfileDetails.getEmail(),
-                    userProfileDetails.getRoad(), userProfileDetails.getNum(), 
-                    userProfileDetails.getPostalCode());
+            UserProfile userProfile = new UserProfile(email, encryptedPassword,
+                    userProfileDetails.getName(),
+                    userProfileDetails.getBirthDate(),
+                    userProfileDetails.getPhoneNumber(),
+                    userProfileDetails.getAccount());
             
-
             userProfileDao.save(userProfile);
             return userProfile;
         }
@@ -42,21 +45,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional(readOnly = true)
-    public UserProfile login(String loginName, String password,
+    public UserProfile login(String email, String password,
             boolean passwordIsEncrypted) throws InstanceNotFoundException,
             IncorrectPasswordException {
 
-        UserProfile userProfile = userProfileDao.findByLoginName(loginName);
+        UserProfile userProfile = userProfileDao.findByEmail(email);
         String storedPassword = userProfile.getEncryptedPassword();
 
         if (passwordIsEncrypted) {
             if (!password.equals(storedPassword)) {
-                throw new IncorrectPasswordException(loginName);
+                throw new IncorrectPasswordException(email);
             }
         } else {
             if (!PasswordEncrypter.isClearPasswordCorrect(password,
                     storedPassword)) {
-                throw new IncorrectPasswordException(loginName);
+                throw new IncorrectPasswordException(email);
             }
         }
         return userProfile;
@@ -75,12 +78,10 @@ public class UserServiceImpl implements UserService {
             throws InstanceNotFoundException {
 
         UserProfile userProfile = userProfileDao.find(userProfileId);
-        userProfile.setFirstName(userProfileDetails.getFirstName());
-        userProfile.setLastName(userProfileDetails.getLastName());
-        userProfile.setEmail(userProfileDetails.getEmail());
-        userProfile.setRoad(userProfileDetails.getRoad());
-        userProfile.setNum(userProfileDetails.getNum());
-        userProfile.setPostalCode(userProfileDetails.getPostalCode());
+        userProfile.setName(userProfileDetails.getName());
+        userProfile.setBirthDate(userProfileDetails.getBirthDate());
+        userProfile.setPhoneNumber(userProfileDetails.getPhoneNumber());
+        userProfile.setAccount(userProfileDetails.getAccount());
 
     }
 
@@ -95,12 +96,20 @@ public class UserServiceImpl implements UserService {
 
         if (!PasswordEncrypter.isClearPasswordCorrect(oldClearPassword,
                 storedPassword)) {
-            throw new IncorrectPasswordException(userProfile.getLoginName());
+            throw new IncorrectPasswordException(userProfile.getEmail());
         }
 
         userProfile.setEncryptedPassword(PasswordEncrypter
                 .crypt(newClearPassword));
 
+    }
+    
+    public UserProfile findUserProfileByEmail(String email) throws InstanceNotFoundException {
+    	return userProfileDao.findByEmail(email);
+    }
+    
+    public String getRoleNameByUserEmail(String email) throws InstanceNotFoundException {
+    	return roleDao.getRoleNameByUserEmail(email);
     }
 
 }

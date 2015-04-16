@@ -1,4 +1,4 @@
-package es.udc.tfg_es.clubtriatlon.web.pages.user;
+package es.udc.tfg_es.clubtriatlon.web.pages.admin;
 
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.Property;
@@ -22,7 +22,7 @@ import es.udc.tfg_es.clubtriatlon.model.util.exceptions.DuplicateInstanceExcepti
 public class Register {
 
     @Property
-    private String loginName;
+    private String email;
 
     @Property
     private String password;
@@ -31,22 +31,16 @@ public class Register {
     private String retypePassword;
 
     @Property
-    private String firstName;
-
-    @Property
-    private String lastName;
-
-    @Property
-    private String email;
+    private String name;
     
     @Property
-    private String road;
+    private String birthDate;
     
     @Property
-    private String number;
+    private int phoneNumber;
     
     @Property
-    private int postalCode;
+    private String account;
 
     @SessionState(create=false)
     private UserSession userSession;
@@ -57,8 +51,8 @@ public class Register {
     @Component
     private Form registrationForm;
 
-    @Component(id = "loginName")
-    private TextField loginNameField;
+    @Component(id = "email")
+    private TextField emailField;
 
     @Component(id = "password")
     private PasswordField passwordField;
@@ -80,11 +74,11 @@ public class Register {
         } else {
 
             try {
-                UserProfile userProfile = userService.registerUser(loginName, password,
-                    new UserProfileDetails(firstName, lastName, email, road, number, postalCode));
+                UserProfile userProfile = userService.registerUser(email, password,
+                    new UserProfileDetails(name, birthDate, phoneNumber, account));
                 userProfileId = userProfile.getUserProfileId();
             } catch (DuplicateInstanceException e) {
-                registrationForm.recordError(loginNameField, messages
+                registrationForm.recordError(emailField, messages
                         .get("error-loginNameAlreadyExists"));
             }
 
@@ -96,7 +90,7 @@ public class Register {
 
         userSession = new UserSession();
         userSession.setUserProfileId(userProfileId);
-        userSession.setFirstName(firstName);
+        userSession.setName(name);
         return Index.class;
 
     }

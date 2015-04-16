@@ -35,16 +35,14 @@ public class SupportedLanguages {
          * component.
          *
          */
-        String options_en = "en=English, gl=Galician, es=Spanish";
-        String options_es = "es=Español, gl=Gallego, en=Inglés";
-        String options_gl = "es=Español, gl=Galego, en=Inglés";
+        String options_es = "es=Español, gl=Gallego";
+        String options_gl = "es=Español, gl=Galego";
 
         options = new HashMap<String, String>();
-        options.put("en", options_en);
         options.put("es", options_es);
         options.put("gl", options_gl);
 
-        codes = "en,es,gl";
+        codes = "es,gl";
 
     }
 
@@ -59,7 +57,7 @@ public class SupportedLanguages {
         if (languages != null) {
             return languages;
         } else {
-            return options.get("en");
+            return options.get("es");
         }
 
     }

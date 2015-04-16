@@ -3,7 +3,7 @@
 	t:menuExplanation="menuExplanation">
 
 	<p>
-		<a href="#" t:type="PageLink" t:page="user/Register">${message:register}</a>		       
+		<a href="#" t:type="PageLink" t:page="admin/Register">${message:register}</a>		       
 	</p>
 
 	<form t:type="Form" t:id="loginForm">
@@ -11,9 +11,9 @@
 	   <t:errors/>
 		
 	   <div class="field">        
-	        <t:label for="loginName"/>
+	        <t:label for="email"/>
 	        <span class="entry">    
-	            <input t:id="loginName" t:type="TextField"
+	            <input t:id="email" t:type="TextField"
 				       t:validate="required" 
 				       size="16" maxlength="30" />
 	        </span>

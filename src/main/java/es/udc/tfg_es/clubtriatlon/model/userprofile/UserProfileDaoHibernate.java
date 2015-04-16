@@ -9,14 +9,14 @@ import es.udc.tfg_es.clubtriatlon.model.util.exceptions.InstanceNotFoundExceptio
 public class UserProfileDaoHibernate extends
 		GenericDaoHibernate<UserProfile, Long> implements UserProfileDao {
 
-	public UserProfile findByLoginName(String loginName) throws InstanceNotFoundException {
+	public UserProfile findByEmail(String email) throws InstanceNotFoundException {
 
     	UserProfile userProfile = (UserProfile) getSession().createQuery(
-    			"SELECT u FROM UserProfile u WHERE u.loginName = :loginName")
-    			.setParameter("loginName", loginName)
+    			"SELECT u FROM UserProfile u WHERE u.email = :email")
+    			.setParameter("email", email)
     			.uniqueResult();
     	if (userProfile == null) {
-   			throw new InstanceNotFoundException(loginName, UserProfile.class.getName());
+   			throw new InstanceNotFoundException(email, UserProfile.class.getName());
     	} else {
     		return userProfile;
     	}

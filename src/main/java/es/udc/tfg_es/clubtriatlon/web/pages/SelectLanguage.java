@@ -2,12 +2,14 @@ package es.udc.tfg_es.clubtriatlon.web.pages;
 
 import java.util.Locale;
 
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.PersistentLocale;
 
 import es.udc.tfg_es.clubtriatlon.web.util.SupportedLanguages;
 
+//@RequiresRoles("ROLE_USER")
 public class SelectLanguage {
 
     @Property
@@ -17,7 +19,7 @@ public class SelectLanguage {
     private Locale locale;
 
     @Property
-	private String languageList = "en=english, es=español, gl=galego";
+	private String languageList = "es=español, gl=galego";
 
     @Inject
     private PersistentLocale persistentLocale;

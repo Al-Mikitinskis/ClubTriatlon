@@ -5,10 +5,10 @@
 	<form t:type="Form" t:id="registrationForm">
 	   <t:errors/>
 	   <div class="field">        
-	        <t:label for="loginName"/>
+	        <t:label for="email"/>
 	        <span class="entry">    
-	            <input t:id="loginName" t:type="TextField"
-				       t:validate="required" 
+	            <input t:id="email" t:type="TextField"
+				       t:validate="required,regexp" 
 				       size="16" maxlength="30" />
 	        </span>
 	   </div>
@@ -32,50 +32,32 @@
 	   </div>
 	    
 	   <div class="field">        
-	        <t:label for="firstName"/>
+	        <t:label for="name"/>
 	        <span class="entry">    
-	            <input t:id="firstName" t:type="TextField"
+	            <input t:id="name" t:type="TextField"
 				       t:validate="required" 
-				       size="16" maxlength="30" />
-	        </span>
-	   </div>
-	   
-	   <div class="field">        
-	        <t:label for="lastName"/>
-	        <span class="entry">    
-	            <input t:id="lastName" t:type="TextField"
-				       t:validate="required" 
-				       size="16" maxlength="30" />
-	        </span>
-	   </div>
-	   
-	   <div class="field">        
-	        <t:label for="email"/>
-	        <span class="entry">    
-	            <input t:id="email" t:type="TextField"
-				       t:validate="required,regexp" 
 				       size="16" maxlength="30" />
 	        </span>
 	   </div>
 	    
 	   <div class="field">        
-	        <t:label for="road"/>
+	        <t:label for="birthDate"/>
 	        <span class="entry">    
-	            <input t:id="road" t:type="TextField" size="16" maxlength="30"/>
+	            <input t:id="birthDate" t:type="TextField" size="11" maxlength="10"/>
 	        </span>
 	   </div>
 	   
 	   <div class="field">        
-	        <t:label for="number"/>
+	        <t:label for="phoneNumber"/>
 	        <span class="entry">    
-	            <input t:id="number" t:type="TextField" size="6" maxlength="3"/>
+	            <input t:id="phoneNumber" t:type="TextField" size="10" maxlength="9"/>
 	        </span>
 	   </div>
 	   
 	   <div class="field">        
-	        <t:label for="postalCode"/>
+	        <t:label for="account"/>
 	        <span class="entry">    
-	            <input t:id="postalCode" t:type="TextField" size="6" maxlength="5"/>
+	            <input t:id="account" t:type="TextField" size="40" maxlength="40"/>
 	        </span>
 	   </div>
 	   

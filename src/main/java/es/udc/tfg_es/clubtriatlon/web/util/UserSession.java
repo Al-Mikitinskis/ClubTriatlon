@@ -3,7 +3,7 @@ package es.udc.tfg_es.clubtriatlon.web.util;
 public class UserSession {
 
 	private Long userProfileId;
-	private String firstName;
+	private String name;
 
 	public Long getUserProfileId() {
 		return userProfileId;
@@ -13,12 +13,12 @@ public class UserSession {
 		this.userProfileId = userProfileId;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getName() {
+		return name;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }
