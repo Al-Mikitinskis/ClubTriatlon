@@ -1,8 +1,8 @@
 package es.udc.tfg_es.clubtriatlon.web.pages;
+/* BSD License */
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.Property;

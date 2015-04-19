@@ -1,11 +1,17 @@
 package es.udc.tfg_es.clubtriatlon.model.userprofile;
+/* BSD License */
 
 import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+
+import es.udc.tfg_es.clubtriatlon.model.role.Role;
 
 @Entity
 public class UserProfile {
@@ -17,12 +23,13 @@ public class UserProfile {
 	private String birthDate;
 	private int    phoneNumber;
 	private String account;
+	private Role   role;
 
 	public UserProfile() {
 	}
 
 	public UserProfile(String email, String encryptedPassword, String name,
-			String birthDate, int phoneNumber, String account) {
+			String birthDate, int phoneNumber, String account, Role role) {
 		
 		/* NOTE: "userProfileId" *must* be left as "null" since its value is
 		 * automatically generated. */
@@ -33,6 +40,7 @@ public class UserProfile {
 		this.birthDate         = birthDate;
 		this.phoneNumber       = phoneNumber;
 		this.account           = account;
+		this.role              = role;
 	}
 
 	@Column(name = "usrId")
@@ -97,6 +105,16 @@ public class UserProfile {
 
 	public void setAccount(String account) {
 		this.account = account;
+	}
+	
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name = "role")
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	@Override

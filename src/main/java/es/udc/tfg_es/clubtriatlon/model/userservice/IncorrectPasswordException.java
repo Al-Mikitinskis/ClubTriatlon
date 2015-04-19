@@ -1,4 +1,5 @@
 package es.udc.tfg_es.clubtriatlon.model.userservice;
+/* BSD License */
 
 @SuppressWarnings("serial")
 public class IncorrectPasswordException extends Exception {

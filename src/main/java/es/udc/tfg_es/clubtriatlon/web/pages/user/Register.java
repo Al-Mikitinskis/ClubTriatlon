@@ -1,4 +1,7 @@
 package es.udc.tfg_es.clubtriatlon.web.pages.admin;
+/* BSD License */
+
+import java.util.List;
 
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.Property;
@@ -9,6 +12,8 @@ import org.apache.tapestry5.corelib.components.TextField;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
+import es.udc.tfg_es.clubtriatlon.model.role.Role;
+import es.udc.tfg_es.clubtriatlon.model.roleservice.RoleService;
 import es.udc.tfg_es.clubtriatlon.model.userprofile.UserProfile;
 import es.udc.tfg_es.clubtriatlon.model.userservice.UserProfileDetails;
 import es.udc.tfg_es.clubtriatlon.model.userservice.UserService;
@@ -17,6 +22,7 @@ import es.udc.tfg_es.clubtriatlon.web.services.AuthenticationPolicy;
 import es.udc.tfg_es.clubtriatlon.web.services.AuthenticationPolicyType;
 import es.udc.tfg_es.clubtriatlon.web.util.UserSession;
 import es.udc.tfg_es.clubtriatlon.model.util.exceptions.DuplicateInstanceException;
+import es.udc.tfg_es.clubtriatlon.model.util.exceptions.InstanceNotFoundException;
 
 @AuthenticationPolicy(AuthenticationPolicyType.NON_AUTHENTICATED_USERS)
 public class Register {
@@ -41,6 +47,26 @@ public class Register {
     
     @Property
     private String account;
+    
+    @Property
+	private Long roleId;
+
+	public String getAllRoles() {
+		String roleString = "";
+		List<Role> list = roleService.findAllRoles();
+		int i;
+		for(i=0; i<list.size(); i++) {
+			if (i>0) roleString += ", ";
+			roleString += list.get(i).getId() + "=" + list.get(i).getName();
+		}
+		return roleString;
+	}
+
+    @Property
+	private String role = getAllRoles();
+    
+    @Inject
+    private RoleService roleService;
 
     @SessionState(create=false)
     private UserSession userSession;
@@ -62,7 +88,7 @@ public class Register {
 
     private Long userProfileId;
 
-    void onValidateFromRegistrationForm() {
+    void onValidateFromRegistrationForm() throws InstanceNotFoundException {
 
         if (!registrationForm.isValid()) {
             return;
@@ -74,8 +100,10 @@ public class Register {
         } else {
 
             try {
+            	Role role = roleService.getRoleById(roleId);
                 UserProfile userProfile = userService.registerUser(email, password,
-                    new UserProfileDetails(name, birthDate, phoneNumber, account));
+                    new UserProfileDetails(name, birthDate, phoneNumber, account),
+                    role);
                 userProfileId = userProfile.getUserProfileId();
             } catch (DuplicateInstanceException e) {
                 registrationForm.recordError(emailField, messages

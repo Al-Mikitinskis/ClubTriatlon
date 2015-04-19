@@ -1,4 +1,5 @@
 package es.udc.tfg_es.clubtriatlon.test.experiments;
+/* BSD License */
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

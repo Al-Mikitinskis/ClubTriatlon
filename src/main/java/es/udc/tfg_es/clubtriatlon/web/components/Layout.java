@@ -1,4 +1,5 @@
 package es.udc.tfg_es.clubtriatlon.web.components;
+/* BSD License */
 
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;

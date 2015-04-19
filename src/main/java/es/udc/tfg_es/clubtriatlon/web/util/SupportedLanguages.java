@@ -1,4 +1,5 @@
 package es.udc.tfg_es.clubtriatlon.web.util;
+/* BSD License */
 
 import java.util.HashMap;
 import java.util.Map;

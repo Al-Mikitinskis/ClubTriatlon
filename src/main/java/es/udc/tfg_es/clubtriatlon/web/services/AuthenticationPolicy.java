@@ -1,4 +1,5 @@
 package es.udc.tfg_es.clubtriatlon.web.services;
+/* BSD License */
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

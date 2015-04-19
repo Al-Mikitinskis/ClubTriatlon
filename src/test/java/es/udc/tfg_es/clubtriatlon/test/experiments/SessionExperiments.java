@@ -1,8 +1,10 @@
 package es.udc.tfg_es.clubtriatlon.test.experiments;
+/* BSD License */
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import es.udc.tfg_es.clubtriatlon.model.role.Role;
 import es.udc.tfg_es.clubtriatlon.model.userprofile.UserProfile;
 import es.udc.tfg_es.clubtriatlon.model.userservice.util.PasswordEncrypter;
 
@@ -14,11 +16,11 @@ public class SessionExperiments {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-
+			Role role = new Role("user");
 			// Register user.
 			UserProfile userProfile = new UserProfile("sessionUser",
 					PasswordEncrypter.crypt("userPassword"), "name",
-					"1980/01/23", 601601601, "account");
+					"1980/01/23", 601601601, "account", role);
 			session.saveOrUpdate(userProfile);
 			Long userId = userProfile.getUserProfileId();
 			System.out.println("User with userId '" + userId

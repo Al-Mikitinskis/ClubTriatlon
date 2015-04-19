@@ -1,22 +1,14 @@
 package es.udc.tfg_es.clubtriatlon.web.services;
+/* BSD License */
 
-import org.apache.shiro.realm.AuthorizingRealm;
-import org.apache.shiro.realm.Realm;
-import org.apache.shiro.web.mgt.WebSecurityManager;
 import org.apache.tapestry5.SymbolConstants;
-import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
-import org.apache.tapestry5.ioc.annotations.Autobuild;
-import org.apache.tapestry5.ioc.annotations.Contribute;
-import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.apache.tapestry5.services.ComponentEventRequestFilter;
 import org.apache.tapestry5.services.PageRenderRequestFilter;
 import org.apache.tapestry5.services.RequestFilter;
 import org.apache.tapestry5.services.transform.ComponentClassTransformWorker2;
-import org.tynamo.security.services.SecurityFilterChainFactory;
-import org.tynamo.security.services.impl.SecurityFilterChain;
 
 /**
  * This module is automatically included as part of the Tapestry IoC Registry,
@@ -31,9 +23,7 @@ public class AppModule {
 		binder.bind(SessionFilter.class);
 		binder.bind(PageRenderAuthenticationFilter.class);
 		binder.bind(ComponentEventAuthenticationFilter.class);
-		/* Bind my Apache Shiro Realm*/
-//		binder.bind(AuthorizingRealm.class, UserProfileRealm.class).
-//			withId(UserProfileRealm.class.getSimpleName());
+
 	}
 
 	public static void contributeApplicationDefaults(
@@ -105,24 +95,5 @@ public class AppModule {
 				componentEventAuthenticationFilter, "before:*");
 
 	}
-
-//	public static void contributeSecurityConfiguration(Configuration<SecurityFilterChain> configuration,
-//			SecurityFilterChainFactory factory) {
-//		configuration.add(factory.createChain("/Login").add(factory.anon()).build());
-////		configuration.add(factory.createChain("/Index").add(factory.anon()).build());
-////		configuration.add(factory.createChain("/SelectLanguage").add(factory.roles(), "ROLE_USER").build());
-////		configuration.add(factory.createChain("/admin/**").add(factory.roles(), "ROLE_ADMIN").build());
-//	}
-	
-	//Este es el método malo... con Inject peta, con autobuild no
-////	public static void contributeWebSecurityManager(Configuration<Realm> configuration,
-////			@InjectService("UserProfileRealm") AuthorizingRealm userProfileRealm) {
-////		configuration.add(userProfileRealm);
-////	}
-	
-//	@Contribute(WebSecurityManager.class) 
-//	public static void  addRealms(Configuration<Realm> configuration, @Autobuild UserProfileRealm userProfileRealm) { 
-//		configuration.add(userProfileRealm); 
-//	}
 	
 }

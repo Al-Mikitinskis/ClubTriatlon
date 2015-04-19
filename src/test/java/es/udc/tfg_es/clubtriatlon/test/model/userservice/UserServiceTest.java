@@ -1,4 +1,5 @@
 package es.udc.tfg_es.clubtriatlon.test.model.userservice;
+/* BSD License */
 
 import static es.udc.tfg_es.clubtriatlon.model.util.GlobalNames.SPRING_CONFIG_FILE;
 import static es.udc.tfg_es.clubtriatlon.test.util.GlobalNames.SPRING_CONFIG_TEST_FILE;
@@ -11,6 +12,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import es.udc.tfg_es.clubtriatlon.model.role.Role;
+import es.udc.tfg_es.clubtriatlon.model.role.RoleDao;
 import es.udc.tfg_es.clubtriatlon.model.userprofile.UserProfile;
 import es.udc.tfg_es.clubtriatlon.model.userservice.IncorrectPasswordException;
 import es.udc.tfg_es.clubtriatlon.model.userservice.UserProfileDetails;
@@ -27,15 +30,22 @@ public class UserServiceTest {
 
     @Autowired
     private UserService userService;
+    
+    @Autowired
+    private RoleDao roleDao;
 
     @Test
     public void testRegisterUserAndFindUserProfile()
         throws DuplicateInstanceException, InstanceNotFoundException {
 
+    	Role role = new Role("user");
+    	roleDao.save(role);
+    	
         // Register user and find profile.
         UserProfile userProfile = userService.registerUser(
             "user", "userPassword",
-            new UserProfileDetails("name", "1980/01/23", 601601601, "account"));
+            new UserProfileDetails("name", "1980/01/23", 601601601, "account"),
+            role);
 
         UserProfile userProfile2 = userService.findUserProfile(
             userProfile.getUserProfileId());
@@ -46,19 +56,19 @@ public class UserServiceTest {
     }
 
     @Test(expected = DuplicateInstanceException.class)
-    public void testRegisterDuplicatedUser() throws DuplicateInstanceException,
-        InstanceNotFoundException {
+    public void testRegisterDuplicatedUser() throws DuplicateInstanceException {
 
         String email = "user";
         String clearPassword = "userPassword";
         UserProfileDetails userProfileDetails = 
         		new UserProfileDetails("name", "1980/01/23", 601601601, "account");
+        Role role = new Role("user");
+        roleDao.save(role);
+        userService.registerUser(email, clearPassword,
+            userProfileDetails, role);
 
         userService.registerUser(email, clearPassword,
-            userProfileDetails);
-
-        userService.registerUser(email, clearPassword,
-            userProfileDetails);
+            userProfileDetails, role);
 
     }
 
@@ -195,11 +205,11 @@ public class UserServiceTest {
 
         UserProfileDetails userProfileDetails = new UserProfileDetails(
             "name", "1980/01/23", 89910, "account");
-
+        Role role = new Role("user");
+        roleDao.save(role);
         try {
-
             return userService.registerUser(
-                email, clearPassword, userProfileDetails);
+                email, clearPassword, userProfileDetails, role);
 
         } catch (DuplicateInstanceException e) {
             throw new RuntimeException(e);

@@ -1,4 +1,5 @@
 package es.udc.tfg_es.clubtriatlon.model.userservice.util;
+/* BSD License */
 
 /**
  * This utility class is a implementation of the C source code written by

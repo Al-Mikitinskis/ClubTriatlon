@@ -1,4 +1,5 @@
 package es.udc.tfg_es.clubtriatlon.model.util.dao;
+/* BSD License */
 
 import java.io.Serializable;
 

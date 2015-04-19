@@ -1,7 +1,7 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
 	t:type="Layout" t:pageTitle="title" 
 	t:menuExplanation="menuExplanation">
-
+<!-- BSD License -->
 	<p>
 		<a href="#" t:type="PageLink" t:page="admin/Register">${message:register}</a>		       
 	</p>

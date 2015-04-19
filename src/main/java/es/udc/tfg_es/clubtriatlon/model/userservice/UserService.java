@@ -1,5 +1,7 @@
 package es.udc.tfg_es.clubtriatlon.model.userservice;
+/* BSD License */
 
+import es.udc.tfg_es.clubtriatlon.model.role.Role;
 import es.udc.tfg_es.clubtriatlon.model.userprofile.UserProfile;
 import es.udc.tfg_es.clubtriatlon.model.util.exceptions.DuplicateInstanceException;
 import es.udc.tfg_es.clubtriatlon.model.util.exceptions.InstanceNotFoundException;
@@ -7,7 +9,7 @@ import es.udc.tfg_es.clubtriatlon.model.util.exceptions.InstanceNotFoundExceptio
 public interface UserService {
 
     public UserProfile registerUser(String email, String clearPassword,
-            UserProfileDetails userProfileDetails)
+            UserProfileDetails userProfileDetails, Role role)
             throws DuplicateInstanceException;
 
     public UserProfile login(String email, String password,
@@ -26,7 +28,5 @@ public interface UserService {
             InstanceNotFoundException;
     
     public UserProfile findUserProfileByEmail(String email) throws InstanceNotFoundException;
-    
-    public String getRoleNameByUserEmail(String email) throws InstanceNotFoundException;
 
 }

@@ -1,10 +1,11 @@
 package es.udc.tfg_es.clubtriatlon.model.userservice;
+/* BSD License */
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import es.udc.tfg_es.clubtriatlon.model.role.RoleDao;
+import es.udc.tfg_es.clubtriatlon.model.role.Role;
 import es.udc.tfg_es.clubtriatlon.model.userprofile.UserProfile;
 import es.udc.tfg_es.clubtriatlon.model.userprofile.UserProfileDao;
 import es.udc.tfg_es.clubtriatlon.model.userservice.util.PasswordEncrypter;
@@ -17,12 +18,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserProfileDao userProfileDao;
-    
-    @Autowired
-    private RoleDao roleDao;
 
     public UserProfile registerUser(String email, String clearPassword,
-            UserProfileDetails userProfileDetails)
+            UserProfileDetails userProfileDetails, Role role)
             throws DuplicateInstanceException {
 
         try {
@@ -36,9 +34,12 @@ public class UserServiceImpl implements UserService {
                     userProfileDetails.getName(),
                     userProfileDetails.getBirthDate(),
                     userProfileDetails.getPhoneNumber(),
-                    userProfileDetails.getAccount());
-            
+                    userProfileDetails.getAccount(),
+                    role);
+
             userProfileDao.save(userProfile);
+            
+
             return userProfile;
         }
 
@@ -106,10 +107,6 @@ public class UserServiceImpl implements UserService {
     
     public UserProfile findUserProfileByEmail(String email) throws InstanceNotFoundException {
     	return userProfileDao.findByEmail(email);
-    }
-    
-    public String getRoleNameByUserEmail(String email) throws InstanceNotFoundException {
-    	return roleDao.getRoleNameByUserEmail(email);
     }
 
 }

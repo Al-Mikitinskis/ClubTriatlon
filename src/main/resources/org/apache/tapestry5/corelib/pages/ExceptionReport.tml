@@ -1,9 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- BSD License -->
 
-<!-- 
-Redefinition of the original ExceptionReport.tml included in Tapestry Core jar 
-file.
--->
+<!-- Redefinition of the original ExceptionReport.tml included in Tapestry Core jar  file. -->
 
 <html xml:space="default" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
     <head>

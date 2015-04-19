@@ -1,0 +1,43 @@
+-- Indexes for primary keys have been explicitly created
+
+-- Table for validation queries from the connection pool -----------------
+
+DROP   TABLE PingTable;
+CREATE TABLE PingTable (foo CHAR(1));
+
+-- Drops -----------------------------------------------------------------
+
+DROP TABLE Role;
+DROP TABLE UserProfile;
+
+-- Role ------------------------------------------------------------------
+
+CREATE TABLE Role (
+    roleId BIGINT NOT NULL AUTO_INCREMENT,
+    name   VARCHAR(11) NOT NULL,
+    CONSTRAINT RolePK PRIMARY KEY (roleId),
+    CONSTRAINT RoleNameUniqueKey UNIQUE (name) ) 
+    ENGINE = InnoDB;
+
+CREATE INDEX RoleIndexByRoleId ON Role (roleId);
+CREATE INDEX RoleIndexByName   ON Role (name);
+
+-- UserProfile -----------------------------------------------------------
+
+CREATE TABLE UserProfile (
+    usrId       BIGINT NOT NULL AUTO_INCREMENT,
+    email       VARCHAR(30) COLLATE latin1_bin NOT NULL,
+    enPassword  VARCHAR(13) NOT NULL,
+    name        VARCHAR(40) NOT NULL,
+    birthDate   VARCHAR(11) NULL,
+    phoneNumber VARCHAR(10) NULL,
+    account     VARCHAR(40) NOT NULL,
+    role        BIGINT NOT NULL,
+    CONSTRAINT UserProfilePK PRIMARY KEY (usrId),
+    CONSTRAINT EmailUniqueKey UNIQUE (email) ) 
+    ENGINE = InnoDB;
+
+CREATE INDEX UserProfileIndexByUsrId ON UserProfile (usrId);
+CREATE INDEX UserProfileIndexByEmail ON UserProfile (email);
+
+

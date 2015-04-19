@@ -1,4 +1,5 @@
 package es.udc.tfg_es.clubtriatlon.model.userprofile;
+/* BSD License */
 
 import es.udc.tfg_es.clubtriatlon.model.util.dao.GenericDao;
 import es.udc.tfg_es.clubtriatlon.model.util.exceptions.InstanceNotFoundException;

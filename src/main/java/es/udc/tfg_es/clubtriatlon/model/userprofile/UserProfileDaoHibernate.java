@@ -1,4 +1,5 @@
 package es.udc.tfg_es.clubtriatlon.model.userprofile;
+/* BSD License */
 
 import org.springframework.stereotype.Repository;
 

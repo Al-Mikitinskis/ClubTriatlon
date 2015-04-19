@@ -1,4 +1,5 @@
 package es.udc.tfg_es.clubtriatlon.web.services;
+/* BSD License */
 
 import org.apache.tapestry5.runtime.Component;
 import org.apache.tapestry5.services.ApplicationStateManager;

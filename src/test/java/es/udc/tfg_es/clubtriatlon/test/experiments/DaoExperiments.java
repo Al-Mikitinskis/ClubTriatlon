@@ -1,7 +1,9 @@
 package es.udc.tfg_es.clubtriatlon.test.experiments;
+/* BSD License */
 
 import org.hibernate.Transaction;
 
+import es.udc.tfg_es.clubtriatlon.model.role.Role;
 import es.udc.tfg_es.clubtriatlon.model.userprofile.UserProfile;
 import es.udc.tfg_es.clubtriatlon.model.userprofile.UserProfileDao;
 import es.udc.tfg_es.clubtriatlon.model.userprofile.UserProfileDaoHibernate;
@@ -20,11 +22,11 @@ public class DaoExperiments {
 		Transaction tx = HibernateUtil.getSessionFactory().getCurrentSession()
 				.beginTransaction();
 		try {
-
+			Role role = new Role("user");
 			// Register user.
 			UserProfile userProfile = new UserProfile("daoUser",
 					PasswordEncrypter.crypt("userPassword"), "name",
-					"1980/01/23", 601601601, "account");
+					"1980/01/23", 601601601, "account", role);
 			userProfileDao.save(userProfile);
 			Long userId = userProfile.getUserProfileId();
 			System.out.println("User with userId '" + userId

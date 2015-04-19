@@ -1,4 +1,5 @@
 package es.udc.tfg_es.clubtriatlon.model.userservice.util;
+/* BSD License */
 
 import java.util.Random;
 
