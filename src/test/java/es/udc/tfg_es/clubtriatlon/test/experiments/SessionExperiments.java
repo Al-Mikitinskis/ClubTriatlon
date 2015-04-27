@@ -4,9 +4,9 @@ package es.udc.tfg_es.clubtriatlon.test.experiments;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import es.udc.tfg_es.clubtriatlon.model.role.Role;
-import es.udc.tfg_es.clubtriatlon.model.userprofile.UserProfile;
-import es.udc.tfg_es.clubtriatlon.model.userservice.util.PasswordEncrypter;
+import es.udc.tfg_es.clubtriatlon.model.Role;
+import es.udc.tfg_es.clubtriatlon.model.UserProfile;
+import es.udc.tfg_es.clubtriatlon.utils.PasswordEncrypter;
 
 public class SessionExperiments {
 

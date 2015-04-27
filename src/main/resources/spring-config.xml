@@ -33,32 +33,15 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<!-- Enable usage of @Autowired. -->
+	<!-- Enable usage of @Autowired -->
 	<context:annotation-config/>
 
-	<!-- Enable component scanning for defining beans with annotations. -->
-	<context:component-scan base-package="es.udc.tfg_es.clubtriatlon.model"/>
-
-	<!--  For translating native persistence exceptions to Spring's 
-	      DataAccessException hierarchy. -->
-	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
-
-	<!--  Data source. -->
+	<!-- Data source -->
 	<bean id="dataSource"
 		class="org.springframework.jndi.JndiObjectFactoryBean"
 		p:jndiName="${dataSource.jndiName}"
 		p:resourceRef="true" />
 		
-	<!-- Heroku config. No funciona, pero cree en el pom.xml -P server y -P local para que funcione -->
-<!-- 	<bean class="java.net.URI" id="dbUrl"> -->
-<!-- 		<constructor-arg value="#{systemEnvironment['CLUBTRIATLON_DATABASE_URL']}"/> -->
-<!-- 	</bean> -->
-<!-- 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"> -->
-<!-- 		<property name="url"      value="#{ 'jdbc:mysql://' + @dbUrl.getHost() + ':' + @dbUrl.getPort() + @dbUrl.getPath() }"/> -->
-<!-- 		<property name="username" value="#{ @dbUrl.getUserInfo().split(':')[0] }"/> -->
-<!-- 		<property name="password" value="#{ @dbUrl.getUserInfo().split(':')[1] }"/> -->
-<!-- 	</bean> -->
-
 	<bean id="dataSourceProxy" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy"
 		p:targetDataSource-ref="dataSource"/>
 
@@ -68,28 +51,39 @@
 		p:dataSource-ref="dataSourceProxy"
 		p:configLocation="classpath:/hibernate.cfg.xml"/>
 
-	<!-- Transaction manager for a single Hibernate SessionFactory.  -->
+	<!-- Transaction manager for a single Hibernate SessionFactory  -->
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager"
 		p:sessionFactory-ref="sessionFactory" />
 
+	<!--  For translating native persistence exceptions to Spring's DataAccessException hierarchy -->
+	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+
 	<!-- Enable the configuration of transactional behavior based on annotations. -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
+    <!-- Enable component scanning for defining beans with annotations. -->
+    <context:component-scan base-package="es.udc.tfg_es.clubtriatlon.model, 
+                                          es.udc.tfg_es.clubtriatlon.service" />
+
     <!-- Apache Shiro (http://shiro.apache.org/spring.html) -->
-	<!-- ===================================================-->
-	<!-- La aplicación no tiene permisos, solo roles, pero debemos definir una consulta en permissionsQuery
-	     o usará la consulta por defecto (otras tablas, atributos...). De momento dejo esto así pero ver si
-	     hay alguna manera de omitirla si no estará realizando siempre una consulta...-->
 	<bean id="jdbcRealm" class="org.apache.shiro.realm.jdbc.JdbcRealm">
 		<property name="name" value="jdbcRealm" />
 		<property name="dataSource" ref="dataSource" />
 		<property name="authenticationQuery" value="SELECT enPassword as password
 		                                            FROM UserProfile
 		                                            WHERE email = ?" />
-		<property name="userRolesQuery" value="SELECT r.name as role_name
-		                                       FROM UserProfile u INNER JOIN Role r ON (u.role = r.roleId)
-		                                       WHERE u.email = ?" />
+		<!-- ¿Es mejor JOIN o subconsulta?-->
+		<property name="userRolesQuery" value="SELECT name as role_name
+		                                       FROM Role 
+		                                       WHERE roleId = (SELECT role
+		                                                       FROM UserProfile
+		                                                       WHERE email = ?)" />
+<!-- 		<property name="userRolesQuery" value="SELECT r.name as role_name -->
+<!-- 		                                       FROM UserProfile u INNER JOIN Role r ON (u.role = r.roleId) -->
+<!-- 		                                       WHERE u.email = ?" /> -->
+	<!-- Hay que definir permissionsQuery (aunque la App no tenga permisos) o usará la consulta por defecto.
+	     Lo dejo así pero ver si se puede omitir... si no estará realizando siempre una consulta -->
 		<property name="permissionsQuery" value="SELECT enPassword as password
 		                                         FROM UserProfile
 		                                         WHERE email = ?" />
@@ -103,7 +97,8 @@
 
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
 
-	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+	    depends-on="lifecycleBeanPostProcessor"/>
 
 	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
 		<property name="securityManager" ref="securityManager"/>

@@ -1,6 +1,7 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
-	t:type="Layout" t:pageTitle="title" 
-	t:menuExplanation="menuExplanation">
+      xmlns:p="tapestry:parameter"
+      t:type="Layout" t:pageTitle="title"
+      t:menuExplanation="menuExplanation">
 <!-- ClubTriatlon: a web app to management of administrative work of a triathlon club
      Copyright (C) 2015 Alejandro Mikitinskis
 
@@ -20,6 +21,7 @@
 
     Contact here: alejandro.mikitinskis@udc.es -->
 
+<t:if test="user">
 <form t:type="Form" t:id="selectLanguageForm">
 
 	<t:errors/>
@@ -36,5 +38,13 @@
     </div>
 
 </form>
+	
+	<p:else>
+		Área autorizada para usuarios<br/><br/>
+		<a href="#" id="indexPage" t:type="PageLink" t:page="Index">
+			Ir a inicio
+		</a>
+	</p:else>
+</t:if>
 		
 </html>

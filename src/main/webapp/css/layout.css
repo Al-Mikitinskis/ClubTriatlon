@@ -1,0 +1,414 @@
+/* ClubTriatlon: a web app to management of administrative work of a triathlon club
+Copyright (C) 2015 Alejandro Mikitinskis
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software Foundation,
+Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+
+Contact here: alejandro.mikitinskis@udc.es */
+
+/* Design top-bottom */
+
+/* BIG DESKTOPS +1200px */
+
+/* *******************  Body  ********************* */
+
+html, body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	margin: 0;
+	padding: 0;
+	width: 100;
+	height: 100%;
+}
+
+/* ===================  Window  =================== */
+
+#window {
+	background-color: #d2d2d2;
+	width: 100%;
+	height: 100%;
+}
+
+/* =================  Page title  ================= */
+
+#pageTitle {
+	background-color: #d2d2d2;
+	width: 100%;
+	height: 20%;
+/*     color: #121212; */
+/*     text-align: center; */
+/*     font-weight: bold; */
+}
+
+#pageTitle img {
+	margin-top: 0.25%;
+	padding-top: 0.25%;
+	height: 90%;
+	max-width: 70%;
+}
+
+/* =================  Menu info  ================== */
+
+#menuInfo {
+    background-color: #2f2f2f;
+    color: #ffffff;
+    text-align: left;
+    width: 100%;
+    height: 3%;
+    padding-top: 0.85%;
+    padding-bottom: 0.85%;
+}
+
+#menuWelcome {
+    font-weight: bold;
+    padding-left: 0.5%;
+}
+
+#menuExplanation {
+
+}
+
+/* ================  Menu options  ================ */
+
+#menuOptions {
+	width: 100%;
+	background: #ee5609;
+}
+
+#menuOptions nav {
+	width: 100%;
+	background: #ee5609;
+}
+
+#menuFace {
+	display: none;
+}
+
+#menuOptions nav ul {
+	overflow: hidden;
+	list-style: none;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+#menuOptions nav ul li {
+	min-width: 15%;
+	float: left;
+}
+
+#menuOptions nav ul li a {
+	font-size: 16px;
+	color: #fff;
+	text-align: center;
+	padding: 10px;
+	display: block;
+	text-decoration: none;
+}
+
+#menuOptions nav ul li a img {
+/* Si todas las imágenes fueran iguales... */
+	display:block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 2px;
+/* 	width: 20%;  */
+/* 	height: 20%; */
+/* 	margin-right: 2px; */
+}
+
+#menuOptions nav ul li a:hover {
+	background: #FF7519;
+	font-style: oblique;
+	font-weight: bold;
+}
+
+/* ===================  Content  ================== */
+
+#content {
+	width: 100%;
+	float: center;    
+	text-align: center;
+	background-color:#fff;
+	border-top: #fff 2px solid;
+	border-bottom: #fff 5px solid;
+/*     min-height: 55%; */
+}
+
+/* p.welcome { */
+/*     font-size: 16px; */
+/* } */
+
+/* -----------------  Body links  ----------------- */
+
+a {
+	font-weight: bold;
+	text-decoration: none;
+	color: #64a110;
+}
+
+a:hover {
+	text-decoration:underline;
+}
+
+/* -------------------- Forms  -------------------- */
+
+form {
+	width: 100%;
+}
+
+div.button input {
+	font-size: 14px;
+}
+
+div.field {
+	clear: both;
+	padding-top: 1em;
+	width: 100%;
+}
+
+div.field label {
+	float: left;    
+	text-align: right;
+	font-weight: bold;
+	width: 49.5%;
+}
+
+div.field span.entry {
+	float: right;    
+	text-align: left;
+	width: 49.5%;
+}
+
+div.button {
+	clear: both;
+	padding-top: 1em;
+	text-align: center;
+	width: 100%;
+}
+
+input, select, textarea  {
+	background-color: #d2d2d2;
+}
+
+/* ---------------  Error messages  --------------- */
+
+div.t-error ul {
+	font-weight: bold;
+}
+
+/* ===================  Footer  =================== */
+
+#footer {
+	clear: both;
+	background: #2f2f2f;
+	color: #ffffff;
+	text-align: center;
+	margin-top: 0.05%;
+	padding-top: 0.05%;
+	margin-bottom: 0.05%;
+	padding-bottom: 0.05%;
+	width: 100%;
+	border-top: #2f2f2f 1px solid;
+	border-bottom: #2f2f2f 1px solid;
+/* 	min-height:5%; */
+}
+
+/* *****************  Media Query  ******************* */
+
+/* LANDSCAPE TABLETS and NORMAL DESKTOPS */
+@media (max-width: 1199px) {
+	
+	html, body {
+		font-size: 12px;
+	}
+	
+	#menuOptions nav ul li {
+		min-width: 12.5%;
+	}
+
+	#menuOptions nav ul li a {
+		font-size: 14px;
+		padding: 8px;
+	}
+	
+	div.field label {
+		width: 39.5%;
+	}
+
+	div.field span.entry {
+		width: 59.5%;
+	}
+	
+	div.button input {
+		font-size: 12px;
+	}
+	
+	/* Content, Forms */
+	
+	div.button input {
+		font-size: 10px;
+	}
+	
+	div.field {
+		display:block;
+	    clear: both;
+	    padding-top: 1em;
+	    width: 100%;
+	}
+	
+	div.field label {
+	    float: center;    
+	    text-align: center;
+	    font-weight: bold;
+	    width: 100%;
+	}
+	
+	div.field span.entry {
+		display: block;
+	    float: center;    
+	    text-align: center;
+	    width: 100%;
+	    
+	}
+	
+	div.field span.entry input {
+		width:30%;
+	}
+	
+	div.field span.entry div{
+		display: block;
+	}
+
+	/* PORTRAIT TABLETS and LANDSCAPE MOBILES */
+	@media (max-width: 767px) {
+	
+		body {
+			font-size: 10px;
+		}
+	
+		/* Menu */
+	
+		#menuFace {
+			display: block;
+			width: 100%;
+			background: #ee5609;
+			padding-bottom: 2px;
+			border-bottom: #fff 1px solid;
+		}
+	
+		#menuFace #menuFaceButton {
+			display: block;
+			padding: 0.04%;
+			background: #ee5609;
+	/* 		color:#fff; */
+	/* 		text-decoration:none; */
+	/* 		font-weight: bold; */
+	/* 		font-size:12px; */
+			width: 4%; 
+			height: 4%;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+	
+	/* 	#menuFace span { */
+	/* 		float: right; */
+	/* 	} */
+		
+		#menuOptions nav {
+			width: 40%;
+			height: 100%;
+			left: -100%;
+			margin: 0;
+			position: fixed;
+		}
+		
+		#menuOptions nav ul li {
+			display: block;
+			float: none;
+			border-bottom: #fff 1px solid;
+		}
+	
+		#menuOptions nav ul li a {
+			font-size: 12px;
+			padding: 8px;
+			text-align: left;
+		}
+		
+		#menuOptions nav ul li a img {
+			display:inline;
+			width: 6%; 
+			height: 6%;
+		}
+		
+		div.field span.entry input {
+			width:40%;
+		}
+	
+		
+		/* PORTRAIT MOBILES */
+		@media (max-width:480px) {
+		
+			html, body {
+				font-size: 8px;
+			}
+	
+			#menuOptions nav ul li a {
+				font-size: 10px;
+				padding: 10px;
+			}
+			
+			#menuOptions nav {
+				width:40%;
+			}
+			
+			div.button input {
+				font-size: 8px;
+			}
+	
+		}
+		
+		/* PORTRAIT SMALL MOBILES */
+		@media (max-width:240px) {
+	
+			html, body {
+				font-size: 7px;
+			}
+			
+			#menuOptions nav {
+				width:80%;
+			}
+			
+			div.button input {
+				font-size: 7px;
+			}
+	
+		}
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

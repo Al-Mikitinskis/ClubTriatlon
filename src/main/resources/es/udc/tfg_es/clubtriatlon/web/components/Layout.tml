@@ -25,27 +25,26 @@
 
 <head>
 	<title>${pageTitle}</title>
-	<link rel="StyleSheet" href="${context:/css/styles.css}"
-		  type="text/css" media="all"/>
+	<meta name="viewport" content="width=device-width, user-scalable=no, 
+				initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
 </head>
 
 <body>
 
-<!-- Window. -->
+<!-- Window -->
 
 <div id="window">
 
-<!-- Page title. -->
+<!-- Page title -->
 
-<div id="pageTitle">
-	<div align="center">
-       ${message:header}
-	</div>
+<div id="pageTitle" align="center">
+	<img src="${context:/images/logo-NoSportLimit.png}" />
+<!-- 	${message:header} -->
 </div>
 
-<!-- Menu. -->
+<!-- Menu info -->
 
-<div id="menu">
+<div id="menuInfo">
 	<span id="menuWelcome">
   		<t:if test="userSession">
  			${message:menu-hello} ${userSession.name}
@@ -62,53 +61,85 @@
  	</t:if>
 </div>
 
-<table  width="100%" >
-<tr >
 
-<!-- Sidebar. -->
+<!-- Menu options -->
 
-<td valign="top" id="sidebar" width="15%" >
-
+<div id="menuOptions">
+	<div id="menuFace">
+		<a href="#"><img id="menuFaceButton" 
+		   src="${context:/images/menu/menu_button.png}" /></a>
+	</div>
+<nav>
   	<ul>
 	<t:if test="userSession">
 		<t:security.hasrole role="Administrador">
-			<li><a href="#" id="planning" t:type="PageLink" t:page="admin/Planning">
-					${message:sidebar-adminPlaning}</a></li>
-			<li><a href="#" id="preferences" t:type="PageLink" t:page="admin/AdminPreferences">
-			${message:sidebar-preferences}</a></li>
+		
+			<li><a href="#" id="planningWeekly" t:type="PageLink"
+			       t:page="admin/plannings/PlanningWeekly">
+				   <img src="${context:/images/menu/planning.png}" />
+			       ${message:menuOptions-planningWeekly}</a></li>
+			<li><a href="#" id="usersManagement" t:type="PageLink"
+			       t:page="admin/users/Users">
+			       <img src="${context:/images/menu/users.png}" />
+			       ${message:menuOptions-usersManagement}</a></li>
+			<li><a href="#" id="sharesManagement" t:type="PageLink"
+			       t:page="admin/shares/Shares">
+			       <img src="${context:/images/menu/credit_card.png}" />
+			  <!-- <img src="${context:/images/menu/calculator.png}" /> -->
+			       ${message:menuOptions-sharesManagment}</a></li>
+			<li><a href="#" id="eventsManagement" t:type="PageLink"
+			       t:page="admin/events/EventsManagement">
+			       <img src="${context:/images/menu/calendar.png}" />
+			       ${message:menuOptions-events}</a></li>
+			<li><a href="#" id="adminPreferences" t:type="PageLink"
+			       t:page="admin/AdminPreferences">
+			       <img src="${context:/images/menu/preferences.png}" />
+			       ${message:menuOptions-preferences}</a></li>
+			
 		</t:security.hasrole>
 		<t:security.hasrole role="Usuario">
-			<li><a href="#" id="preferences" t:type="PageLink" t:page="user/UserPreferences">
-			${message:sidebar-preferences}</a></li>
+		
+			<li><a href="#" id="myProfile" t:type="PageLink"
+			       t:page="user/profile/MyProfile">
+			       <img src="${context:/images/menu/user.png}" />
+			       ${message:menuOptions-myProfile}</a></li>
+			<li><a href="#" id="myShares" t:type="PageLink"
+			       t:page="user/shares/MyShares">
+			       <img src="${context:/images/menu/credit_card.png}" />
+					${message:menuOptions-myShares}</a></li>
+			<li><a href="#" id="events" t:type="PageLink"
+			       t:page="user/events/Events">
+			       <img src="${context:/images/menu/calendar.png}" />
+			       ${message:menuOptions-events}</a></li>
+			<li><a href="#" id="userPreferences" t:type="PageLink"
+			       t:page="user/UserPreferences">
+			       <img src="${context:/images/menu/preferences.png}" />
+			       ${message:menuOptions-preferences}</a></li>
+			
 		</t:security.hasrole>
-			<li>   	
-				<a href="#" id="logout" t:type="ActionLink" t:id="logout">
-					${message:sidebar-logout}</a>
-			</li>
+		<li><a href="#" id="logout" t:type="ActionLink" t:id="logout">
+		       <img src="${context:/images/menu/logout.png}" />
+		       ${message:menuOptions-logout}</a></li>
 	<p:else>
-			<li>   	
-				<a href="#" id="autenticarse" t:type="PageLink" t:page="Login">
-					${message:sidebar-authenticate}</a>
-			</li>
+		<li><a href="#" id="autenticarse" t:type="PageLink" t:page="Login">
+		       <img src="${context:/images/menu/login.png}" />
+		       ${message:menuOptions-authenticate}</a></li>
 	</p:else>
 	</t:if>
   	</ul>
-</td>
+</nav>
 
-<!-- Content. -->
+</div> <!-- End of "menuOptions" id -->
 
-<td id="content" width="85%" >
+<!-- Content -->
 
-<div >
+<div id="content">
 	<div align="center">
   		<t:body/>
   	</div>
 </div>
-</td>
-</tr>
-</table>
 
-<!-- Body footer. -->
+<!-- Body footer -->
 
 <div id="footer">
     <div align="center">
@@ -116,12 +147,9 @@
     </div>
 </div>
 
-<!-- End of "window" id. -->
 
-</div>
+</div> <!-- End of "window" id -->
 
-<!-- End of HTML body. -->
-
-</body>
+</body> <!-- End of HTML body -->
 
 </html>

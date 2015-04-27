@@ -1,6 +1,7 @@
 package es.udc.tfg_es.clubtriatlon.web.components;
 /* BSD License */
 
+import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SessionState;
@@ -13,6 +14,8 @@ import es.udc.tfg_es.clubtriatlon.web.services.AuthenticationPolicyType;
 import es.udc.tfg_es.clubtriatlon.web.util.CookiesManager;
 import es.udc.tfg_es.clubtriatlon.web.util.UserSession;
 
+@Import(stylesheet={"context:/css/layout.css"},
+        library={"context:/js/jquery-latest.js", "context:/js/menuOptions.js"})
 public class Layout {
     @Property
     @Parameter(required = false, defaultPrefix = "message")

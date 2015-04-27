@@ -3,12 +3,12 @@ package es.udc.tfg_es.clubtriatlon.test.experiments;
 
 import org.hibernate.Transaction;
 
-import es.udc.tfg_es.clubtriatlon.model.role.Role;
-import es.udc.tfg_es.clubtriatlon.model.userprofile.UserProfile;
-import es.udc.tfg_es.clubtriatlon.model.userprofile.UserProfileDao;
-import es.udc.tfg_es.clubtriatlon.model.userprofile.UserProfileDaoHibernate;
-import es.udc.tfg_es.clubtriatlon.model.userservice.util.PasswordEncrypter;
-import es.udc.tfg_es.clubtriatlon.model.util.exceptions.InstanceNotFoundException;
+import es.udc.tfg_es.clubtriatlon.model.Role;
+import es.udc.tfg_es.clubtriatlon.model.UserProfile;
+import es.udc.tfg_es.clubtriatlon.model.UserProfileDao;
+import es.udc.tfg_es.clubtriatlon.model.UserProfileDaoHibernate;
+import es.udc.tfg_es.clubtriatlon.utils.PasswordEncrypter;
+import es.udc.tfg_es.clubtriatlon.utils.exceptions.InstanceNotFoundException;
 
 public class DaoExperiments {
 

@@ -20,15 +20,23 @@ Contact here: alejandro.mikitinskis@udc.es */
 
 import java.util.Locale;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.PersistentLocale;
 
 import es.udc.tfg_es.clubtriatlon.web.pages.Index;
+import es.udc.tfg_es.clubtriatlon.web.services.AuthenticationPolicy;
+import es.udc.tfg_es.clubtriatlon.web.services.AuthenticationPolicyType;
 import es.udc.tfg_es.clubtriatlon.web.util.SupportedLanguages;
 
+@AuthenticationPolicy(AuthenticationPolicyType.AUTHENTICATED_USERS)
 public class AdminPreferences {
 
+	public boolean isAdmin() {
+		return SecurityUtils.getSubject().hasRole("Administrador");
+	}
+	
     @Property
     private String language;
 

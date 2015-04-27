@@ -2,9 +2,6 @@
 	t:type="Layout" t:pageTitle="title" 
 	t:menuExplanation="menuExplanation">
 <!-- BSD License -->
-	<p>
-		<a href="#" t:type="PageLink" t:page="admin/Register">${message:register}</a>		       
-	</p>
 
 	<form t:type="Form" t:id="loginForm">
 	

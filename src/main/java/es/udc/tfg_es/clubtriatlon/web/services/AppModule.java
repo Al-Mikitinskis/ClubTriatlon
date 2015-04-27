@@ -9,6 +9,7 @@ import org.apache.tapestry5.services.ComponentEventRequestFilter;
 import org.apache.tapestry5.services.PageRenderRequestFilter;
 import org.apache.tapestry5.services.RequestFilter;
 import org.apache.tapestry5.services.transform.ComponentClassTransformWorker2;
+//import org.got5.tapestry5.jquery.JQuerySymbolConstants;
 
 /**
  * This module is automatically included as part of the Tapestry IoC Registry,
@@ -33,6 +34,11 @@ public class AppModule {
 		// to FactoryDefaults (with the same key). Here we're restricting the
 		// supported locales.
 		configuration.add(SymbolConstants.SUPPORTED_LOCALES, "es,gl");
+		
+		//The default jQuery alias is $, we can change it with
+		//configuration.add(JQuerySymbolConstants.JQUERY_ALIAS, "yourOwnAlias");
+		//Or if we not use it:
+		//configuration.override(JQuerySymbolConstants.SUPPRESS_PROTOTYPE, "true"); 
 
 	}
 

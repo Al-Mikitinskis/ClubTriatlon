@@ -1,19 +1,19 @@
 package es.udc.tfg_es.clubtriatlon.test.experiments;
 /* BSD License */
 
-import static es.udc.tfg_es.clubtriatlon.model.util.GlobalNames.SPRING_CONFIG_FILE;
+import static es.udc.tfg_es.clubtriatlon.utils.GlobalNames.SPRING_CONFIG_FILE;
 import static es.udc.tfg_es.clubtriatlon.test.util.GlobalNames.SPRING_CONFIG_TEST_FILE;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import es.udc.tfg_es.clubtriatlon.model.role.Role;
-import es.udc.tfg_es.clubtriatlon.model.userprofile.UserProfile;
-import es.udc.tfg_es.clubtriatlon.model.userservice.IncorrectPasswordException;
-import es.udc.tfg_es.clubtriatlon.model.userservice.UserProfileDetails;
-import es.udc.tfg_es.clubtriatlon.model.userservice.UserService;
-import es.udc.tfg_es.clubtriatlon.model.util.exceptions.DuplicateInstanceException;
-import es.udc.tfg_es.clubtriatlon.model.util.exceptions.InstanceNotFoundException;
+import es.udc.tfg_es.clubtriatlon.model.Role;
+import es.udc.tfg_es.clubtriatlon.model.UserProfile;
+import es.udc.tfg_es.clubtriatlon.utils.IncorrectPasswordException;
+import es.udc.tfg_es.clubtriatlon.utils.UserProfileDetails;
+import es.udc.tfg_es.clubtriatlon.service.UserService;
+import es.udc.tfg_es.clubtriatlon.utils.exceptions.DuplicateInstanceException;
+import es.udc.tfg_es.clubtriatlon.utils.exceptions.InstanceNotFoundException;
 
 public class UserServiceExperiments {
 

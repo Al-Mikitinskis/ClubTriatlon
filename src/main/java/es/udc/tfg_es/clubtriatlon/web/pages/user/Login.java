@@ -12,14 +12,14 @@ import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.Cookies;
 
-import es.udc.tfg_es.clubtriatlon.model.userprofile.UserProfile;
-import es.udc.tfg_es.clubtriatlon.model.userservice.IncorrectPasswordException;
-import es.udc.tfg_es.clubtriatlon.model.userservice.UserService;
+import es.udc.tfg_es.clubtriatlon.model.UserProfile;
+import es.udc.tfg_es.clubtriatlon.utils.IncorrectPasswordException;
+import es.udc.tfg_es.clubtriatlon.service.UserService;
 import es.udc.tfg_es.clubtriatlon.web.services.AuthenticationPolicy;
 import es.udc.tfg_es.clubtriatlon.web.services.AuthenticationPolicyType;
 import es.udc.tfg_es.clubtriatlon.web.util.CookiesManager;
 import es.udc.tfg_es.clubtriatlon.web.util.UserSession;
-import es.udc.tfg_es.clubtriatlon.model.util.exceptions.InstanceNotFoundException;
+import es.udc.tfg_es.clubtriatlon.utils.exceptions.InstanceNotFoundException;
 
 @AuthenticationPolicy(AuthenticationPolicyType.NON_AUTHENTICATED_USERS)
 public class Login {
