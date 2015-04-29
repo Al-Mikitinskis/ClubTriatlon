@@ -49,7 +49,7 @@ public class RoleWebTest {
 		assertEquals(planningLink.getText(), "Planes de entrenamiento");
 		planningLink.click();
 		assertEquals(driver.getCurrentUrl(), 
-				"http://localhost:9090/triatlon/admin/plannings/planningweekly");
+				"http://localhost:9090/triatlon/admin/plannings/planningweekly/0");
 		SeleniumMethods.logout(driver);
 		driver.quit();
 

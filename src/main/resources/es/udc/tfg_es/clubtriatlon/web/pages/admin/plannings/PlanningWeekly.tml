@@ -1,6 +1,6 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
-      xmlns:p="tapestry:parameter"
-      t:type="Layout" t:pageTitle="title">
+	xmlns:p="tapestry:parameter" t:type="Layout" t:pageTitle="title"
+	t:menuExplanation="menuExplanation">
 <!-- ClubTriatlon: a web app to management of administrative work of a triathlon club
      Copyright (C) 2015 Alejandro Mikitinskis
 
@@ -20,17 +20,73 @@
 
      Contact here: alejandro.mikitinskis@udc.es -->
 
+<br />
 <t:if test="admin">
-	<p class="welcome">
-    	Prueba página admins...
+	<p>
+		<a href="#" id="trainingsManagement" t:type="PageLink"
+			t:page="admin/plannings/TrainingsManagement">
+<!-- 			${message:trainingsManagement} -->
+			Gestión de entrenamientos</a>
 	</p>
-	
+	<p>
+		<a href="#" id="newWeeklyPlanning" t:type="PageLink"
+			t:page="admin/plannings/NewWeeklyPlanning">
+			${message:newWeeklyPlanning}</a>
+	</p>
+
+	<br />
+	<t:zone t:id="weeksListZone" id="weeksList">
+		<t:if test="weeklyPlannings">
+
+			<style>
+				table { text-align: center; }
+			</style>
+			<!-- Print found weeklyPlannings -->
+			<table>
+				<tr>
+					<th><u>${message:weeksListTitle}</u></th>
+				</tr>
+				<tr t:type="Loop" t:source="weeklyPlannings"
+					t:value="weeklyPlanning" formstate="Iteration">
+					<td><a href="#" t:type="PageLink"
+						t:page="admin/plannings/WeeklyPlanningDetails"
+						t:context="weeklyPlanning.weeklyPlanningId" >
+							${weeklyPlanning.name} </a></td>
+				</tr>
+				<tr>
+					<td>
+						<span class="previousLink">
+							<t:if test="previousLinkContext">
+								<t:actionlink t:id="previousLink" zone="weeksList">
+									<b> &#60; </b>
+								</t:actionlink> 
+							</t:if>
+						</span>
+						<span class="nextLink">
+							<t:if test="nextLinkContext">
+								<t:actionlink t:id="nextLink" zone="weeksList">
+									<b> &#62; </b>
+								</t:actionlink> 
+							</t:if>
+						</span>
+					</td>
+				</tr>
+			</table>
+
+			<p:else>
+				<p>${message:noPlannings}</p>
+			</p:else>
+
+		</t:if>
+	</t:zone>
+
 	<p:else>
-		Área autorizada para administradores<br/><br/>
-		<a href="#" id="indexPage" t:type="PageLink" t:page="Index">
-			Ir a inicio
-		</a>
+		Área autorizada para administradores<br />
+		<br />
+		<a href="#" id="indexPage" t:type="PageLink" t:page="Index"> Ir a
+			inicio </a>
 	</p:else>
 </t:if>
-   
+
+<br />
 </html>

@@ -21,13 +21,44 @@
 
 -- Table for validation queries from the connection pool -----------------
 
-DROP   TABLE PingTable;
+DROP TABLE IF EXISTS PingTable;
 CREATE TABLE PingTable (foo CHAR(1));
 
 -- Drops -----------------------------------------------------------------
 
-DROP TABLE UserProfile;
-DROP TABLE Role;
+DROP TABLE IF EXISTS UserProfile;
+DROP TABLE IF EXISTS Role;
+DROP TABLE IF EXISTS Planning;
+DROP TABLE IF EXISTS WeeklyPlanning;
+
+
+-- WeeklyPlanning --------------------------------------------------------
+
+CREATE TABLE WeeklyPlanning (
+    id    BIGINT NOT NULL AUTO_INCREMENT,
+    name  VARCHAR(17) NOT NULL,
+    cDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT WeeklyPlanningPK PRIMARY KEY (id),
+    CONSTRAINT WeeklyPlanningUniqueKey UNIQUE (name) ) 
+    ENGINE = InnoDB;
+
+CREATE INDEX WeeklyPlanningIndexByWpId ON WeeklyPlanning (id);
+
+
+-- Training --------------------------------------------------------------
+
+-- Planning --------------------------------------------------------------
+
+CREATE TABLE Planning (
+    id   BIGINT NOT NULL AUTO_INCREMENT,
+    wpId BIGINT NOT NULL,
+    name VARCHAR(33) NOT NULL,
+    CONSTRAINT PlanningPK PRIMARY KEY(id),
+    CONSTRAINT WpIdFK FOREIGN KEY(wpId)
+        REFERENCES WeeklyPlanning(id) ) 
+    ENGINE = InnoDB;
+
+CREATE INDEX PlanningIndexByLId ON Planning (id);
 
 -- Role ------------------------------------------------------------------
 
