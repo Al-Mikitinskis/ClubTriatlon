@@ -58,7 +58,7 @@
 	<!-- Hibernate Session Factory -->
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
-		p:dataSource-ref="dataSourceProxy"
+		p:dataSource-ref="dataSource"
 		p:configLocation="classpath:/hibernate.cfg.xml"/>
 
 	<!-- Transaction manager for a single Hibernate SessionFactory  -->
