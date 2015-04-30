@@ -37,13 +37,23 @@
 	<context:annotation-config/>
 
 	<!-- Data source -->
-	<bean id="dataSource"
+<!--	<bean id="dataSource"
 		class="org.springframework.jndi.JndiObjectFactoryBean"
 		p:jndiName="${dataSource.jndiName}"
-		p:resourceRef="true" />
-		
-	<bean id="dataSourceProxy" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy"
-		p:targetDataSource-ref="dataSource"/>
+		p:resourceRef="true" /> -->
+ 	<bean class="java.net.URI" id="dbUrl"> 
+ 		<constructor-arg value="#{systemEnvironment['CLUBTRIATLON_DATABASE_URL']}"/>
+ 	</bean>
+ 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${jdbcDriver.className}"/>
+ 		<property name="url"      value="#{ 'jdbc:mysql://' + @dbUrl.getHost() + ':' +
+                                                @dbUrl.getPort() + @dbUrl.getPath() }"/>
+ 		<property name="username" value="#{ @dbUrl.getUserInfo().split(':')[0] }"/>
+ 		<property name="password" value="#{ @dbUrl.getUserInfo().split(':')[1] }"/>
+ 	</bean>
+
+	<!--<bean id="dataSourceProxy" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy"
+		p:targetDataSource-ref="dataSource"/> -->
 
 	<!-- Hibernate Session Factory -->
 	<bean id="sessionFactory"
@@ -52,12 +62,12 @@
 		p:configLocation="classpath:/hibernate.cfg.xml"/>
 
 	<!-- Transaction manager for a single Hibernate SessionFactory  -->
-	<bean id="transactionManager"
+	<!--<bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager"
-		p:sessionFactory-ref="sessionFactory" />
+		p:sessionFactory-ref="sessionFactory" /> -->
 
 	<!--  For translating native persistence exceptions to Spring's DataAccessException hierarchy -->
-	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+	<!--<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/> -->
 
 	<!-- Enable the configuration of transactional behavior based on annotations. -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
