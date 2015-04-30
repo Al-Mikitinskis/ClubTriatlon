@@ -62,12 +62,12 @@
 		p:configLocation="classpath:/hibernate.cfg.xml"/>
 
 	<!-- Transaction manager for a single Hibernate SessionFactory  -->
-	<!--<bean id="transactionManager"
+	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager"
-		p:sessionFactory-ref="sessionFactory" /> -->
+		p:sessionFactory-ref="sessionFactory" />
 
 	<!--  For translating native persistence exceptions to Spring's DataAccessException hierarchy -->
-	<!--<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/> -->
+	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 
 	<!-- Enable the configuration of transactional behavior based on annotations. -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
