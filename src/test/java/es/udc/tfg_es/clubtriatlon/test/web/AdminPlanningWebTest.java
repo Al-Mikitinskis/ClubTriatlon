@@ -89,7 +89,26 @@ public class AdminPlanningWebTest {
 		driver.findElement(By.id("weeksList")).findElement(By.linkText("2015 - s.7")).click();
 		assertEquals(driver.getCurrentUrl(),
 				"http://localhost:9090/triatlon/admin/plannings/weeklyplanningdetails/7");
+		assertEquals(driver.findElement(By.id("menuInfo")).
+				findElement(By.id("menuExplanation")), "Detalles del plan");
 		
+		SeleniumMethods.logout(driver);
+		driver.quit();
+		
+	}
+	
+	@Test
+	public void testWeeklyPlanningDetailsList() {
+		
+		WebDriver driver = SeleniumMethods.auntenticateAdmin();
+		driver.findElement(By.id("menuOptions")).findElement(By.id("planningWeekly")).click();
+		driver.getCurrentUrl();
+		driver.findElement(By.id("weeksList")).findElement(By.linkText("2015 - s.7")).click();
+		driver.getCurrentUrl();
+		assertNotNull(driver.findElement(By.tagName("planning1")));
+		assertNotNull(driver.findElement(By.tagName("planning2")));
+		assertNotNull(driver.findElement(By.tagName("planning3")));
+
 		SeleniumMethods.logout(driver);
 		driver.quit();
 		

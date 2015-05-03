@@ -37,6 +37,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import es.udc.tfg_es.clubtriatlon.service.WeeklyPlanningService;
 import es.udc.tfg_es.clubtriatlon.model.Planning;
+import es.udc.tfg_es.clubtriatlon.model.Training;
 //import es.udc.tfg_es.clubtriatlon.model.Training;
 import es.udc.tfg_es.clubtriatlon.model.WeeklyPlanning;
 
@@ -47,6 +48,12 @@ public class WeeklyPlanningServiceTest {
 	
 	@Autowired
 	private WeeklyPlanningService	weeklyPlanningService;
+	
+	@Autowired
+	private PlanningService	planningService;
+	
+	@Autowired
+	private TrainingService	trainingService;
 	
 	@Test
 	public void testFindWeeklyPlannings() {
@@ -71,6 +78,39 @@ public class WeeklyPlanningServiceTest {
 		weeklyPlanningService.save(wp5);
 		weeklyPlanningService.save(wp6);
 		weeklyPlanningService.save(wp7);
+		
+		// Get the 5 weekly plannings (start index, count elements)
+		List<WeeklyPlanning> listFounds = weeklyPlanningService.findWeeklyPlannings(0, 5);
+		assertTrue(listFounds.size() == 5);
+		// Must be order desc
+		assertEquals(wp7.getName(), listFounds.get(0).getName());
+		assertEquals(wp6.getName(), listFounds.get(1).getName());
+		assertEquals(wp5.getName(), listFounds.get(2).getName());
+		assertEquals(wp4.getName(), listFounds.get(3).getName());
+		assertEquals(wp3.getName(), listFounds.get(4).getName());
+		
+		// Get the next 5 weekly plannings
+		listFounds = weeklyPlanningService.findWeeklyPlannings(5, 5);
+		assertTrue(listFounds.size() == 2);
+		assertEquals(wp2.getName(), listFounds.get(0).getName());
+		assertEquals(wp1.getName(), listFounds.get(1).getName());
+		
+	}
+	
+	@Test
+	public void testGetPlannings() {
+		
+		WeeklyPlanning weeklyPlanning = new WeeklyPlanning("2015 - s.1");
+		weeklyPlanningService.save(weeklyPlanning);
+		
+		Training training = new Training("training1");
+		trainingService.save(training);
+		
+		Planning myPlanning = new Planning(myTraining, "2015/03/25",
+		// "myPDF".getBytes());
+				("planning1", "myPDF".getBytes(), weeklyPlanning, training)
+		Set<Planning> list = new HashSet<Planning>();
+		// list.add(Planning);
 		
 		// Get the 5 weekly plannings (start index, count elements)
 		List<WeeklyPlanning> listFounds = weeklyPlanningService.findWeeklyPlannings(0, 5);

@@ -28,6 +28,9 @@
         <!--  List of persistent classes -->
         <mapping class="es.udc.tfg_es.clubtriatlon.model.UserProfile" />
         <mapping class="es.udc.tfg_es.clubtriatlon.model.Role" />
+        <mapping class="es.udc.tfg_es.clubtriatlon.model.WeeklyPlanning" />
+        <mapping class="es.udc.tfg_es.clubtriatlon.model.Planning" />
+        <mapping class="es.udc.tfg_es.clubtriatlon.model.Training" />
     
     </session-factory>
 </hibernate-configuration>
