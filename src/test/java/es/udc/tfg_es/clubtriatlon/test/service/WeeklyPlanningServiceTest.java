@@ -37,6 +37,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import es.udc.tfg_es.clubtriatlon.service.WeeklyPlanningService;
 import es.udc.tfg_es.clubtriatlon.model.Planning;
+import es.udc.tfg_es.clubtriatlon.model.Training;
 //import es.udc.tfg_es.clubtriatlon.model.Training;
 import es.udc.tfg_es.clubtriatlon.model.WeeklyPlanning;
 
@@ -48,14 +49,16 @@ public class WeeklyPlanningServiceTest {
 	@Autowired
 	private WeeklyPlanningService	weeklyPlanningService;
 	
+	@Autowired
+	private PlanningService	planningService;
+	
+	@Autowired
+	private TrainingService	trainingService;
+	
 	@Test
 	public void testFindWeeklyPlannings() {
 		
-		// Training myTraining = new Training("myTraining");
-		// Planning myPlanning = new Planning(myTraining, "2015/03/25",
-		// "myPDF".getBytes());
 		Set<Planning> list = new HashSet<Planning>();
-		// list.add(Planning);
 		
 		WeeklyPlanning wp1 = new WeeklyPlanning("2015 - s.1", list);
 		WeeklyPlanning wp2 = new WeeklyPlanning("2015 - s.2", list);
@@ -87,6 +90,43 @@ public class WeeklyPlanningServiceTest {
 		assertTrue(listFounds.size() == 2);
 		assertEquals(wp2.getName(), listFounds.get(0).getName());
 		assertEquals(wp1.getName(), listFounds.get(1).getName());
+		
+	}
+	
+	@Test
+	public void testGetPlannings() {
+		
+		WeeklyPlanning weeklyPlanning = new WeeklyPlanning("weeklyPlanning");
+		weeklyPlanningService.save(weeklyPlanning);
+		
+		Training training1 = new Training("training1");
+		Training training2 = new Training("training2");
+		Training training3 = new Training("training3");
+		trainingService.save(training1);
+		trainingService.save(training2);
+		trainingService.save(training3);
+		
+		Planning planning1 = new Planning("planning1", "myPDF".getBytes(), weeklyPlanning, training1);
+		Planning planning2 = new Planning("planning2", "myPDF".getBytes(), weeklyPlanning, training2);
+		Planning planning3 = new Planning("planning3", "myPDF".getBytes(), weeklyPlanning, training3);
+		Set<Planning> plannings = new HashSet<Planning>();
+		plannings.add(planning1);
+		plannings.add(planning2);
+		plannings.add(planning3);
+		
+		weeklyPlanning.setPlannings(plannings);
+		
+		List<Planning> planningsAsc = planningService.orderByTrainingAsc();
+		assertTrue(planningsAsc.size() == 3);
+		assertEquals(planning1.getName(), planningsAsc.get(0).getName());
+		assertEquals(planning2.getName(), planningsAsc.get(1).getName());
+		assertEquals(planning3.getName(), planningsAsc.get(2).getName());
+		
+		List<Planning> planningsDesc = planningService.orderByTrainingAsc();
+		assertTrue(planningsDesc.size() == 3);
+		assertEquals(planning3.getName(), planningsDesc.get(0).getName());
+		assertEquals(planning2.getName(), planningsDesc.get(1).getName());
+		assertEquals(planning1.getName(), planningsDesc.get(2).getName());
 		
 	}
 	
