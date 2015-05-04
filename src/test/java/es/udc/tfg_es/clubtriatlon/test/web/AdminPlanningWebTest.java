@@ -110,7 +110,6 @@ public class AdminPlanningWebTest {
 		assertTrue(tableText.contains("training1"));
 		assertTrue(tableText.contains("training2"));
 		assertTrue(tableText.contains("training3"));
-
 		SeleniumMethods.logout(driver);
 		driver.quit();
 		

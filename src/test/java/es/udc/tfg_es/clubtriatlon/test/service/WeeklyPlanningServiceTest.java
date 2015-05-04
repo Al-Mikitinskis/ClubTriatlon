@@ -137,12 +137,14 @@ public class WeeklyPlanningServiceTest {
 		
 		weeklyPlanning.setPlannings(plannings);
 		
+
 		List<Planning> planningsAsc = weeklyPlanningService.orderByTrainingAsc(weeklyPlanning);
 		assertTrue(planningsAsc.size() == 3);
 		assertEquals(planning1.getName(), planningsAsc.get(0).getName());
 		assertEquals(planning2.getName(), planningsAsc.get(1).getName());
 		assertEquals(planning3.getName(), planningsAsc.get(2).getName());
 		
+
 		List<Planning> planningsDesc = weeklyPlanningService.orderByTrainingDesc(weeklyPlanning);
 		assertTrue(planningsDesc.size() == 3);
 		assertEquals(planning3.getName(), planningsDesc.get(0).getName());
