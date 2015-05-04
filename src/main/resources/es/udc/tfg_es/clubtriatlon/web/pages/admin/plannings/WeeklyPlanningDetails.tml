@@ -1,6 +1,7 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
       xmlns:p="tapestry:parameter"
-      t:type="Layout" t:pageTitle="title">
+      t:type="Layout" t:pageTitle="title"
+      t:menuExplanation="menuExplanation">
 <!-- ClubTriatlon: a web app to management of administrative work of a triathlon club
      Copyright (C) 2015 Alejandro Mikitinskis
 
@@ -20,11 +21,52 @@
 
      Contact here: alejandro.mikitinskis@udc.es -->
 
+<br />
 <t:if test="admin">
-	<p class="welcome">
-    	Pág.Detalles planes semanales
-	</p>
+
+	<t:zone t:id="tableZone" id="tableZone">
+		<t:if test="weeklyPlanning">
+		
+			<b>${weeklyPlanning.name}</b><br /><br />
 	
+			<style>
+				td#downloadColumn { background: ffffff; text-align: center; }
+				input#pdfIcon { background: #ffffff; }
+			</style>
+			<table class="weeklyPlanningDetailsTable">
+				<tr>
+			        <th> ${message:trainingName}
+			        	<t:if test="sortByNameAscContext">
+			        		<t:actionlink t:id="sortByNameAsc" zone="tableZone">
+								<b>  &and; </b>
+							</t:actionlink>
+						</t:if>
+						<t:if test="sortByNameDescContext">
+							<t:actionlink t:id="sortByNameDesc" zone="tableZone">
+								<b>  &or; </b>
+							</t:actionlink>
+						</t:if>
+					</th>
+			        <th> ${message:downloadPlan} </th>
+			    </tr>
+				<tr t:type="Loop" t:source="plannings" t:value="planning">
+					<td>${planning.training.name}</td>
+					<form t:type="Form" t:id="downloadForm" t:context="planning.id">
+					<td id="downloadColumn">
+						<input id="pdfIcon" type="image"
+							src="${context:/images/pdf_icon.png}" alt="Submit" />
+					</td>
+					</form>
+				</tr>
+			</table>
+		        	
+			<p:else>
+				<p>${message:NoWeeklyPlanning}</p>
+			</p:else>
+	
+		</t:if>
+	</t:zone>
+
 	<p:else>
 		Área autorizada para administradores<br/><br/>
 		<a href="#" id="indexPage" t:type="PageLink" t:page="Index">

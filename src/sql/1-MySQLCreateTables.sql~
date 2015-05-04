@@ -37,7 +37,7 @@ DROP TABLE IF EXISTS WeeklyPlanning;
 CREATE TABLE WeeklyPlanning (
     id    BIGINT NOT NULL AUTO_INCREMENT,
     name  VARCHAR(17) NOT NULL,
-    cDate TIMESTAMP NOT NULL,
+    cDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT WeeklyPlanningPK PRIMARY KEY (id),
     CONSTRAINT WeeklyPlanningUniqueKey UNIQUE (name) ) 
     ENGINE = InnoDB;

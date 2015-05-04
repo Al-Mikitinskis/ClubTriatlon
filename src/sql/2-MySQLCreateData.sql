@@ -37,12 +37,24 @@ INSERT INTO WeeklyPlanning VALUES (5, '2015 - s.5', '2015-02-01');
 INSERT INTO WeeklyPlanning VALUES (6, '2015 - s.6', '2015-02-08');
 INSERT INTO WeeklyPlanning VALUES (7, '2015 - s.7', '2015-02-15');
 
--- Training --------------------------------------------------------------
+-- Training -------------------------------------------------------------------
+-- id, name
+
+INSERT INTO Training VALUES (1, 'training1');
+INSERT INTO Training VALUES (2, 'training2');
+INSERT INTO Training VALUES (3, 'training3');
+INSERT INTO Training VALUES (4, 'Triatlón base');
+INSERT INTO Training VALUES (5, '2015 Peregrinos');
+INSERT INTO Training VALUES (6, 'Ciclismo base');
+INSERT INTO Training VALUES (7, 'Carrera base');
+INSERT INTO Training VALUES (8, 'Natación base');
 
 -- Planning --------------------------------------------------------------
--- id, wpId, name
+-- id, name, cDate, wpId, tId
 
-INSERT INTO Planning VALUES (1, 1, 'planning1');
+INSERT INTO Planning (id, name, wpId, tId) VALUES (1, 'planning1', 7, 1);
+INSERT INTO Planning (id, name, wpId, tId) VALUES (2, 'planning2', 7, 2);
+INSERT INTO Planning (id, name, wpId, tId) VALUES (3, 'planning3', 7, 3);
 
 -- Role -----------------------------------------------------------------------
 -- roleId, name

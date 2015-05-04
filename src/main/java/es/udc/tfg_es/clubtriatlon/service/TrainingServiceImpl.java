@@ -1,4 +1,4 @@
-package es.udc.tfg_es.clubtriatlon.model;
+package es.udc.tfg_es.clubtriatlon.service;
 
 /* ClubTriatlon: a web app to management of administrative work of a triathlon club
  Copyright (C) 2015 Alejandro Mikitinskis
@@ -19,25 +19,27 @@ package es.udc.tfg_es.clubtriatlon.model;
 
  Contact here: alejandro.mikitinskis@udc.es */
 
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import es.udc.tfg_es.clubtriatlon.utils.dao.GenericDao;
+import es.udc.tfg_es.clubtriatlon.model.Training;
+import es.udc.tfg_es.clubtriatlon.model.TrainingDao;
 import es.udc.tfg_es.clubtriatlon.utils.exceptions.InstanceNotFoundException;
 
-public interface WeeklyPlanningDao extends GenericDao<WeeklyPlanning, Long> {
+@Service("trainingService")
+@Transactional
+public class TrainingServiceImpl implements TrainingService {
 	
-	public WeeklyPlanning getWeeklyPlanningById(Long weeklyPlanningId)
-			throws InstanceNotFoundException;
+	@Autowired
+	private TrainingDao	trainingDao;
 	
-	/**
-	 * Returns the list of 'WeeklyPlannings' order desc. 'count' elements
-	 * starting on 'startIndex'
-	 *
-	 * @param startIndex
-	 *            The start index
-	 * @param count
-	 *            Number of elements
-	 * @return The list of WeeklyPlannings
-	 */
-	public List<WeeklyPlanning> findWeeklyPlannings(int startIndex, int count);
+	public void save(Training training) {
+		trainingDao.save(training);
+	}
+	
+	public Training getTrainingById(Long trainingId) throws InstanceNotFoundException {
+		return trainingDao.getTrainingById(trainingId);
+	}
+	
 }

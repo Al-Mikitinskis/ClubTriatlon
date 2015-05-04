@@ -19,25 +19,25 @@ package es.udc.tfg_es.clubtriatlon.model;
 
  Contact here: alejandro.mikitinskis@udc.es */
 
-import java.util.List;
+import org.springframework.stereotype.Repository;
 
-import es.udc.tfg_es.clubtriatlon.utils.dao.GenericDao;
+import es.udc.tfg_es.clubtriatlon.utils.dao.GenericDaoHibernate;
 import es.udc.tfg_es.clubtriatlon.utils.exceptions.InstanceNotFoundException;
 
-public interface WeeklyPlanningDao extends GenericDao<WeeklyPlanning, Long> {
+@Repository("PlanningDao")
+public class PlanningDaoHibernate extends GenericDaoHibernate<Planning, Long> implements
+		PlanningDao {
 	
-	public WeeklyPlanning getWeeklyPlanningById(Long weeklyPlanningId)
-			throws InstanceNotFoundException;
+	public Planning getPlanningById(Long planningId) throws InstanceNotFoundException {
+		Planning planning = (Planning) getSession().createQuery(
+    			"SELECT p FROM Planning p WHERE p.id = :planningId")
+    			.setParameter("planningId", planningId)
+    			.uniqueResult();
+    	if (planning == null) {
+   			throw new InstanceNotFoundException(planningId, Planning.class.getName());
+    	} else {
+    		return planning;
+    	}
+	}
 	
-	/**
-	 * Returns the list of 'WeeklyPlannings' order desc. 'count' elements
-	 * starting on 'startIndex'
-	 *
-	 * @param startIndex
-	 *            The start index
-	 * @param count
-	 *            Number of elements
-	 * @return The list of WeeklyPlannings
-	 */
-	public List<WeeklyPlanning> findWeeklyPlannings(int startIndex, int count);
 }

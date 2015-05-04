@@ -29,6 +29,7 @@ CREATE TABLE PingTable (foo CHAR(1));
 DROP TABLE IF EXISTS UserProfile;
 DROP TABLE IF EXISTS Role;
 DROP TABLE IF EXISTS Planning;
+DROP TABLE IF EXISTS Training;
 DROP TABLE IF EXISTS WeeklyPlanning;
 
 
@@ -42,23 +43,37 @@ CREATE TABLE WeeklyPlanning (
     CONSTRAINT WeeklyPlanningUniqueKey UNIQUE (name) ) 
     ENGINE = InnoDB;
 
-CREATE INDEX WeeklyPlanningIndexByWpId ON WeeklyPlanning (id);
+CREATE INDEX WeeklyPlanningIndexById ON WeeklyPlanning (id);
 
 
 -- Training --------------------------------------------------------------
 
+CREATE TABLE Training (
+    id    BIGINT NOT NULL AUTO_INCREMENT,
+    name  VARCHAR(25) NOT NULL,
+    CONSTRAINT WeeklyPlanningPK PRIMARY KEY (id),
+    CONSTRAINT WeeklyPlanningUniqueKey UNIQUE (name) ) 
+    ENGINE = InnoDB;
+
+CREATE INDEX TrainingIndexById ON Training (id);
+
 -- Planning --------------------------------------------------------------
 
 CREATE TABLE Planning (
-    id   BIGINT NOT NULL AUTO_INCREMENT,
-    wpId BIGINT NOT NULL,
-    name VARCHAR(33) NOT NULL,
+    id       BIGINT NOT NULL AUTO_INCREMENT,
+    name     VARCHAR(250) NOT NULL,
+/*  document MEDIUMBLOB NOT NULL, */
+    cDate    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    wpId     BIGINT NOT NULL,
+    tId      BIGINT NOT NULL,
     CONSTRAINT PlanningPK PRIMARY KEY(id),
     CONSTRAINT WpIdFK FOREIGN KEY(wpId)
-        REFERENCES WeeklyPlanning(id) ) 
-    ENGINE = InnoDB;
+        REFERENCES WeeklyPlanning(id),
+    CONSTRAINT TIdFK FOREIGN KEY(tId)
+        REFERENCES Training(id) ) 
+    ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
-CREATE INDEX PlanningIndexByLId ON Planning (id);
+CREATE INDEX PlanningIndexById ON Planning (id);
 
 -- Role ------------------------------------------------------------------
 

@@ -19,14 +19,19 @@ package es.udc.tfg_es.clubtriatlon.service;
 
  Contact here: alejandro.mikitinskis@udc.es */
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import es.udc.tfg_es.clubtriatlon.model.Planning;
 import es.udc.tfg_es.clubtriatlon.model.WeeklyPlanning;
 import es.udc.tfg_es.clubtriatlon.model.WeeklyPlanningDao;
+import es.udc.tfg_es.clubtriatlon.utils.exceptions.InstanceNotFoundException;
 
 @Service("weeklyPlanningService")
 @Transactional
@@ -39,8 +44,41 @@ public class WeeklyPlanningServiceImpl implements WeeklyPlanningService {
 		weeklyPlanningDao.save(weeklyPlanning);
 	}
 	
+	public WeeklyPlanning getWeeklyPlanningById(Long weeklyPlanningId)
+			throws InstanceNotFoundException {
+		return weeklyPlanningDao.getWeeklyPlanningById(weeklyPlanningId);
+	}
+	
 	public List<WeeklyPlanning> findWeeklyPlannings(int startIndex, int count) {
 		return weeklyPlanningDao.findWeeklyPlannings(startIndex, count);
 	}
 	
+	public List<Planning> orderByTrainingAsc(WeeklyPlanning weeklyPlanning) {
+
+		List<Planning> list = new ArrayList<Planning>();
+		list.addAll(weeklyPlanning.getPlannings());
+		Collections.sort(list, new Comparator<Planning>() {
+		    public int compare(Planning p1, Planning p2) {		    	
+		    	return p1.getTraining().getName().compareTo(p2.getTraining().getName());
+		    }
+		});
+		return list;
+		
+	}
+	
+	public List<Planning> orderByTrainingDesc(WeeklyPlanning weeklyPlanning) {
+		
+//		List<Planning> list = orderByTrainingAsc(weeklyPlanning);
+//		Collections.reverse(list);
+//		return list;
+		List<Planning> list = new ArrayList<Planning>();
+		list.addAll(weeklyPlanning.getPlannings());
+		Collections.sort(list, new Comparator<Planning>() {
+		    public int compare(Planning p1, Planning p2) {		    	
+		    	return p2.getTraining().getName().compareTo(p1.getTraining().getName());
+		    }
+		});
+		return list;
+		
+	}
 }

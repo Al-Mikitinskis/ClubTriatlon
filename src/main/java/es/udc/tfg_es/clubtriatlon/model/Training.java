@@ -19,7 +19,6 @@ package es.udc.tfg_es.clubtriatlon.model;
 
  Contact here: alejandro.mikitinskis@udc.es */
 
-import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,17 +31,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 @Entity
-// @Immutable /*Como Pedido -> lineas pedido*/
-public class WeeklyPlanning {
+public class Training {
 	
-	private Long			weeklyPlanningId;
+	private Long			trainingId;
 	private String			name;
-	private Timestamp		creationDate;
 	private Set<Planning>	plannings;
 	
-	public WeeklyPlanning() {}
-
-	public WeeklyPlanning(String name) {
+	public Training() {}
+	
+	public Training(String name) {
 		
 		/*
 		 * NOTE: "id" *must* be left as "null" since its value is automatically
@@ -53,32 +50,24 @@ public class WeeklyPlanning {
 		
 	}
 	
-	public WeeklyPlanning(String name, Set<Planning> plannings) {
+	public Training(String name, Set<Planning> plannings) {
 		
 		this.name = name;
 		this.plannings = plannings;
-		
-	}
-	
-	public WeeklyPlanning(String name, Set<Planning> plannings, Timestamp creationDate) {
-		
-		this.name = name;
-		this.plannings = plannings;
-		this.creationDate = creationDate;
 		
 	}
 	
 	@Column(name = "id")
 	@SequenceGenerator( // It only takes effect for db providing id generators.
-	name = "WeeklyPlanningIdGenerator", sequenceName = "WeeklyPlanningSeq")
+	name = "TrainingIdGenerator", sequenceName = "TrainingSeq")
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "WeeklyPlanningIdGenerator")
-	public Long getWeeklyPlanningId() {
-		return this.weeklyPlanningId;
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "TrainingIdGenerator")
+	public Long getTrainingId() {
+		return this.trainingId;
 	}
 	
-	public void setWeeklyPlanningId(Long weeklyPlanningId) {
-		this.weeklyPlanningId = weeklyPlanningId;
+	public void setTrainingId(Long trainingId) {
+		this.trainingId = trainingId;
 	}
 	
 	public String getName() {
@@ -88,17 +77,8 @@ public class WeeklyPlanning {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	@Column(name = "cDate")
-	public Timestamp getCreationDate() {
-		return creationDate;
-	}
-	
-	public void setCreationDate(Timestamp creationDate) {
-		this.creationDate = creationDate;
-	}
-	
-	@OneToMany(mappedBy = "weeklyPlanning")
+
+	@OneToMany(mappedBy = "training")
 	public Set<Planning> getPlannings() {
 		return plannings;
 	}

@@ -24,6 +24,11 @@ import static es.udc.tfg_es.clubtriatlon.utils.GlobalNames.SPRING_CONFIG_FILE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -35,10 +40,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import es.udc.tfg_es.clubtriatlon.service.PlanningService;
 import es.udc.tfg_es.clubtriatlon.service.WeeklyPlanningService;
+import es.udc.tfg_es.clubtriatlon.service.TrainingService;
 import es.udc.tfg_es.clubtriatlon.model.Planning;
 import es.udc.tfg_es.clubtriatlon.model.Training;
-//import es.udc.tfg_es.clubtriatlon.model.Training;
 import es.udc.tfg_es.clubtriatlon.model.WeeklyPlanning;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -56,21 +62,32 @@ public class WeeklyPlanningServiceTest {
 	private TrainingService	trainingService;
 	
 	@Test
-	public void testFindWeeklyPlannings() {
+	public void testFindWeeklyPlannings() throws ParseException {
 		
-		// Training myTraining = new Training("myTraining");
-		// Planning myPlanning = new Planning(myTraining, "2015/03/25",
-		// "myPDF".getBytes());
 		Set<Planning> list = new HashSet<Planning>();
-		// list.add(Planning);
 		
-		WeeklyPlanning wp1 = new WeeklyPlanning("2015 - s.1", list);
-		WeeklyPlanning wp2 = new WeeklyPlanning("2015 - s.2", list);
-		WeeklyPlanning wp3 = new WeeklyPlanning("2015 - s.3", list);
-		WeeklyPlanning wp4 = new WeeklyPlanning("2015 - s.4", list);
-		WeeklyPlanning wp5 = new WeeklyPlanning("2015 - s.5", list);
-		WeeklyPlanning wp6 = new WeeklyPlanning("2015 - s.6", list);
-		WeeklyPlanning wp7 = new WeeklyPlanning("2015 - s.7", list);
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = dateFormat.parse("04/01/2015");
+		Timestamp time = new Timestamp(date.getTime());
+		WeeklyPlanning wp1 = new WeeklyPlanning("2015 - s.1", list, time);
+		date = dateFormat.parse("11/01/2015");
+		time = new Timestamp(date.getTime());
+		WeeklyPlanning wp2 = new WeeklyPlanning("2015 - s.2", list, time);
+		date = dateFormat.parse("18/01/2015");
+		time = new Timestamp(date.getTime());
+		WeeklyPlanning wp3 = new WeeklyPlanning("2015 - s.3", list, time);
+		date = dateFormat.parse("25/01/2015");
+		time = new Timestamp(date.getTime());
+		WeeklyPlanning wp4 = new WeeklyPlanning("2015 - s.4", list, time);
+		date = dateFormat.parse("01/02/2015");
+		time = new Timestamp(date.getTime());
+		WeeklyPlanning wp5 = new WeeklyPlanning("2015 - s.5", list, time);
+		date = dateFormat.parse("08/02/2015");
+		time = new Timestamp(date.getTime());
+		WeeklyPlanning wp6 = new WeeklyPlanning("2015 - s.6", list, time);
+		date = dateFormat.parse("15/02/2015");
+		time = new Timestamp(date.getTime());
+		WeeklyPlanning wp7 = new WeeklyPlanning("2015 - s.7", list, time);
 		weeklyPlanningService.save(wp1);
 		weeklyPlanningService.save(wp2);
 		weeklyPlanningService.save(wp3);
@@ -100,33 +117,37 @@ public class WeeklyPlanningServiceTest {
 	@Test
 	public void testGetPlannings() {
 		
-		WeeklyPlanning weeklyPlanning = new WeeklyPlanning("2015 - s.1");
+		WeeklyPlanning weeklyPlanning = new WeeklyPlanning("weeklyPlanning");
 		weeklyPlanningService.save(weeklyPlanning);
 		
-		Training training = new Training("training1");
-		trainingService.save(training);
+		Training training1 = new Training("training1");
+		Training training2 = new Training("training2");
+		Training training3 = new Training("training3");
+		trainingService.save(training1);
+		trainingService.save(training2);
+		trainingService.save(training3);
 		
-		Planning myPlanning = new Planning(myTraining, "2015/03/25",
-		// "myPDF".getBytes());
-				("planning1", "myPDF".getBytes(), weeklyPlanning, training)
-		Set<Planning> list = new HashSet<Planning>();
-		// list.add(Planning);
+		Planning planning1 = new Planning("planning1", weeklyPlanning, training1);
+		Planning planning2 = new Planning("planning2", weeklyPlanning, training2);
+		Planning planning3 = new Planning("planning3", weeklyPlanning, training3);
+		Set<Planning> plannings = new HashSet<Planning>();
+		plannings.add(planning1);
+		plannings.add(planning2);
+		plannings.add(planning3);
 		
-		// Get the 5 weekly plannings (start index, count elements)
-		List<WeeklyPlanning> listFounds = weeklyPlanningService.findWeeklyPlannings(0, 5);
-		assertTrue(listFounds.size() == 5);
-		// Must be order desc
-		assertEquals(wp7.getName(), listFounds.get(0).getName());
-		assertEquals(wp6.getName(), listFounds.get(1).getName());
-		assertEquals(wp5.getName(), listFounds.get(2).getName());
-		assertEquals(wp4.getName(), listFounds.get(3).getName());
-		assertEquals(wp3.getName(), listFounds.get(4).getName());
+		weeklyPlanning.setPlannings(plannings);
 		
-		// Get the next 5 weekly plannings
-		listFounds = weeklyPlanningService.findWeeklyPlannings(5, 5);
-		assertTrue(listFounds.size() == 2);
-		assertEquals(wp2.getName(), listFounds.get(0).getName());
-		assertEquals(wp1.getName(), listFounds.get(1).getName());
+		List<Planning> planningsAsc = weeklyPlanningService.orderByTrainingAsc(weeklyPlanning);
+		assertTrue(planningsAsc.size() == 3);
+		assertEquals(planning1.getName(), planningsAsc.get(0).getName());
+		assertEquals(planning2.getName(), planningsAsc.get(1).getName());
+		assertEquals(planning3.getName(), planningsAsc.get(2).getName());
+		
+		List<Planning> planningsDesc = weeklyPlanningService.orderByTrainingDesc(weeklyPlanning);
+		assertTrue(planningsDesc.size() == 3);
+		assertEquals(planning3.getName(), planningsDesc.get(0).getName());
+		assertEquals(planning2.getName(), planningsDesc.get(1).getName());
+		assertEquals(planning1.getName(), planningsDesc.get(2).getName());
 		
 	}
 	

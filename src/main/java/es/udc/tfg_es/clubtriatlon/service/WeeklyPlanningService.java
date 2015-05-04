@@ -21,12 +21,21 @@ package es.udc.tfg_es.clubtriatlon.service;
 
 import java.util.List;
 
+import es.udc.tfg_es.clubtriatlon.model.Planning;
 import es.udc.tfg_es.clubtriatlon.model.WeeklyPlanning;
+import es.udc.tfg_es.clubtriatlon.utils.exceptions.InstanceNotFoundException;
 
 public interface WeeklyPlanningService {
 	
 	public void save(WeeklyPlanning weeklyPlanning);
 	
+	public WeeklyPlanning getWeeklyPlanningById(Long weeklyPlanningId)
+			throws InstanceNotFoundException;
+	
 	public List<WeeklyPlanning> findWeeklyPlannings(int startIndex, int count);
 	
+	public List<Planning> orderByTrainingAsc(WeeklyPlanning weeklyPlanning);
+	
+	public List<Planning> orderByTrainingDesc(WeeklyPlanning weeklyPlanning);
+
 }

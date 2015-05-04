@@ -23,6 +23,7 @@ import static es.udc.tfg_es.clubtriatlon.utils.GlobalNames.SPRING_CONFIG_FILE;
 import static es.udc.tfg_es.clubtriatlon.test.util.GlobalNames.SPRING_CONFIG_TEST_FILE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -90,7 +91,7 @@ public class AdminPlanningWebTest {
 		assertEquals(driver.getCurrentUrl(),
 				"http://localhost:9090/triatlon/admin/plannings/weeklyplanningdetails/7");
 		assertEquals(driver.findElement(By.id("menuInfo")).
-				findElement(By.id("menuExplanation")), "Detalles del plan");
+				findElement(By.id("menuExplanation")).getText(), "- Detalles del plan");
 		
 		SeleniumMethods.logout(driver);
 		driver.quit();
@@ -105,9 +106,10 @@ public class AdminPlanningWebTest {
 		driver.getCurrentUrl();
 		driver.findElement(By.id("weeksList")).findElement(By.linkText("2015 - s.7")).click();
 		driver.getCurrentUrl();
-		assertNotNull(driver.findElement(By.tagName("planning1")));
-		assertNotNull(driver.findElement(By.tagName("planning2")));
-		assertNotNull(driver.findElement(By.tagName("planning3")));
+		String tableText = driver.findElement(By.cssSelector("table.weeklyPlanningDetailsTable")).getText();
+		assertTrue(tableText.contains("training1"));
+		assertTrue(tableText.contains("training2"));
+		assertTrue(tableText.contains("training3"));
 
 		SeleniumMethods.logout(driver);
 		driver.quit();

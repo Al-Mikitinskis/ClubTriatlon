@@ -1,4 +1,4 @@
-package es.udc.tfg_es.clubtriatlon.model;
+package es.udc.tfg_es.clubtriatlon.service;
 
 /* ClubTriatlon: a web app to management of administrative work of a triathlon club
  Copyright (C) 2015 Alejandro Mikitinskis
@@ -19,25 +19,13 @@ package es.udc.tfg_es.clubtriatlon.model;
 
  Contact here: alejandro.mikitinskis@udc.es */
 
-import java.util.List;
-
-import es.udc.tfg_es.clubtriatlon.utils.dao.GenericDao;
+import es.udc.tfg_es.clubtriatlon.model.Planning;
 import es.udc.tfg_es.clubtriatlon.utils.exceptions.InstanceNotFoundException;
 
-public interface WeeklyPlanningDao extends GenericDao<WeeklyPlanning, Long> {
+public interface PlanningService {
 	
-	public WeeklyPlanning getWeeklyPlanningById(Long weeklyPlanningId)
-			throws InstanceNotFoundException;
+	public void save(Planning planning);
 	
-	/**
-	 * Returns the list of 'WeeklyPlannings' order desc. 'count' elements
-	 * starting on 'startIndex'
-	 *
-	 * @param startIndex
-	 *            The start index
-	 * @param count
-	 *            Number of elements
-	 * @return The list of WeeklyPlannings
-	 */
-	public List<WeeklyPlanning> findWeeklyPlannings(int startIndex, int count);
+	public Planning getPlanningById(Long planningId) throws InstanceNotFoundException;
+	
 }
