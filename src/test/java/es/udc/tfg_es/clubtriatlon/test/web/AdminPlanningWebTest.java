@@ -54,6 +54,8 @@ public class AdminPlanningWebTest {
 		trainingsManagementLink.click();
 		assertEquals(driver.getCurrentUrl(),
 				"http://localhost:9090/triatlon/admin/plannings/trainingsmanagement");
+		assertEquals(driver.findElement(By.id("menuInfo")).
+				findElement(By.id("menuExplanation")).getText(), "- Tipos de entrenamiento");
 		
 		SeleniumMethods.logout(driver);
 		driver.quit();
