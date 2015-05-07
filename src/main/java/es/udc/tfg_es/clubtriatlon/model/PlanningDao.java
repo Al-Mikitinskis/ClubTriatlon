@@ -20,10 +20,8 @@ package es.udc.tfg_es.clubtriatlon.model;
  Contact here: alejandro.mikitinskis@udc.es */
 
 import es.udc.tfg_es.clubtriatlon.utils.dao.GenericDao;
-import es.udc.tfg_es.clubtriatlon.utils.exceptions.InstanceNotFoundException;
 
 public interface PlanningDao extends GenericDao<Planning, Long> {
 	
-	public Planning getPlanningById(Long planningId) throws InstanceNotFoundException;
 	
 }

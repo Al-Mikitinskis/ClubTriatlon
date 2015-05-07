@@ -24,37 +24,44 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import org.hibernate.annotations.Type;
+
 @Entity
 public class Training {
 	
-	private Long			trainingId;
-	private String			name;
-	private Set<Planning>	plannings;
+	private Long				trainingId;
+	private String				name;
+	private boolean				status;
+	private Set<Planning>		plannings;
+	private Set<UserProfile>	users;
 	
 	public Training() {}
 	
-	public Training(String name) {
-		
+	public Training(String name)
+	{
 		/*
 		 * NOTE: "id" *must* be left as "null" since its value is automatically
 		 * generated.
 		 */
 		this.name = name;
+		this.status = true;
 		this.plannings = new HashSet<Planning>();
-		
+		this.users = new HashSet<UserProfile>();
 	}
 	
-	public Training(String name, Set<Planning> plannings) {
-		
+	public Training(String name, Set<Planning> plannings)
+	{
 		this.name = name;
+		this.status = true;
 		this.plannings = plannings;
-		
+		this.users = new HashSet<UserProfile>();
 	}
 	
 	@Column(name = "id")
@@ -62,33 +69,68 @@ public class Training {
 	name = "TrainingIdGenerator", sequenceName = "TrainingSeq")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "TrainingIdGenerator")
-	public Long getTrainingId() {
+	public Long getTrainingId()
+	{
 		return this.trainingId;
 	}
 	
-	public void setTrainingId(Long trainingId) {
+	public void setTrainingId(Long trainingId)
+	{
 		this.trainingId = trainingId;
 	}
 	
-	public String getName() {
+	public String getName()
+	{
 		return name;
 	}
 	
-	public void setName(String name) {
+	public void setName(String name)
+	{
 		this.name = name;
 	}
-
-	@OneToMany(mappedBy = "training")
-	public Set<Planning> getPlannings() {
+	
+	@Column(name = "status", columnDefinition = "BIT", length = 1)
+	@Type(type = "org.hibernate.type.BooleanType")
+	public boolean isStatus()
+	{
+		return status;
+	}
+	
+	public void setStatus(boolean status)
+	{
+		this.status = status;
+	}
+	
+	@OneToMany(mappedBy = "training", fetch = FetchType.LAZY)
+	public Set<Planning> getPlannings()
+	{
 		return plannings;
 	}
 	
-	public void setPlannings(Set<Planning> plannings) {
+	public void setPlannings(Set<Planning> plannings)
+	{
 		this.plannings = plannings;
 	}
 	
-	public void addPlanning(Planning planning) {
+	public void addPlanning(Planning planning)
+	{
 		this.plannings.add(planning);
+	}
+	
+	@OneToMany(mappedBy = "training", fetch = FetchType.LAZY)
+	public Set<UserProfile> getUsers()
+	{
+		return users;
+	}
+	
+	public void setUsers(Set<UserProfile> users)
+	{
+		this.users = users;
+	}
+	
+	public void addUser(UserProfile user)
+	{
+		this.users.add(user);
 	}
 	
 }

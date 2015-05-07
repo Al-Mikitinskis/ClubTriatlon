@@ -43,6 +43,7 @@ import org.springframework.transaction.annotation.Transactional;
 import es.udc.tfg_es.clubtriatlon.service.PlanningService;
 import es.udc.tfg_es.clubtriatlon.service.WeeklyPlanningService;
 import es.udc.tfg_es.clubtriatlon.service.TrainingService;
+import es.udc.tfg_es.clubtriatlon.utils.exceptions.DuplicateInstanceException;
 import es.udc.tfg_es.clubtriatlon.model.Planning;
 import es.udc.tfg_es.clubtriatlon.model.Training;
 import es.udc.tfg_es.clubtriatlon.model.WeeklyPlanning;
@@ -115,7 +116,7 @@ public class WeeklyPlanningServiceTest {
 	}
 	
 	@Test
-	public void testGetPlannings() {
+	public void testGetPlannings() throws DuplicateInstanceException {
 		
 		WeeklyPlanning weeklyPlanning = new WeeklyPlanning("weeklyPlanning");
 		weeklyPlanningService.save(weeklyPlanning);

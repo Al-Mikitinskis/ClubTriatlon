@@ -1,6 +1,6 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
-      xmlns:p="tapestry:parameter"
-      t:type="Layout" t:pageTitle="title">
+	xmlns:p="tapestry:parameter" t:type="Layout" t:pageTitle="title"
+	t:menuExplanation="menuExplanation">
 <!-- ClubTriatlon: a web app to management of administrative work of a triathlon club
      Copyright (C) 2015 Alejandro Mikitinskis
 
@@ -20,17 +20,82 @@
 
      Contact here: alejandro.mikitinskis@udc.es -->
 
+<br />
 <t:if test="admin">
-	<p class="welcome">
-    	Pág.Gestión entrenamientos
-	</p>
+
+	<t:zone t:id="formZone" id="formZone">
+		<form t:type="Form" t:id="newTrainingForm" t:zone="formZone">
+			<t:errors />
+				<span class="entry">
+					<input t:id="newName" t:type="TextField" maxlength="24" />
+						&nbsp; &nbsp;
+					<input id="imageSubmit" type="image" alt="Submit"
+						src="${context:/images/add2.png}" />
+				</span>
+		</form>
+	</t:zone>
+	<br />
 	
+	<t:zone t:id="tableZone" id="tableZone">
+<!-- 	<table class="grid" t:type="Zone" t:id="tableZone"> -->
+	<table class="grid">
+		<tr>
+			<th><t:actionlink t:id="sortById" zone="tableZone">
+					<b>  &or; </b>
+				</t:actionlink></th>
+			<th>${message:trainingLabel} 
+				<t:actionlink t:id="sortByName" zone="tableZone">
+					<b>  &or; </b>
+				</t:actionlink></th>
+			<th>${message:statuslabel}
+				<t:actionlink t:id="sortByStatus" zone="tableZone">
+					<b>  &or; </b>
+				</t:actionlink></th>
+			<th>${message:userslabel}</th>
+			<th>${message:actionsLabel}</th>
+		</tr>
+		<t:Loop t:source="trainings" t:value="training">
+			<tr>
+				<td></td>
+				<td class="leftColumn">${training.name}</td>
+				<td><a t:type="eventlink" t:event="changeStatus" zone="tableZone"
+					href="#" t:context="training.trainingId">
+						<t:if test="training.status">
+							<img src="${context:/images/led_circle_green.png}" />
+						</t:if>
+						<t:if test="!training.status">
+							<img src="${context:/images/led_circle_red.png}" />
+						</t:if>
+					</a>
+				</td>
+				<td>${training.users.size()}</td>
+				<td>
+					<a href="#" t:type="PageLink" t:page="admin/plannings/TrainingEdit"
+						t:context="[training.trainingId, order]">
+						<img src="${context:/images/edit.png}" />
+					</a>
+				</td>
+			</tr>
+			
+		</t:Loop>
+	</table>
+	</t:zone>
+	
+<!-- 	<t:if test="changeStatusErrorMessage"> -->
+<!-- 		<span style="color:red">${message:changeStatusErrorMessage}</span><br/> -->
+<!-- 	</t:if> -->
+		
+	<br />
+	<a href="#" t:type="PageLink" t:page="admin/plannings/PlanningWeekly">
+		${message:backLink}</a>
+	<br />
+
 	<p:else>
-		Área autorizada para administradores<br/><br/>
-		<a href="#" id="indexPage" t:type="PageLink" t:page="Index">
-			Ir a inicio
-		</a>
+		Área autorizada para administradores<br />
+		<br />
+		<a href="#" id="indexPage" t:type="PageLink" t:page="Index"> ${message:goToIndex} </a>
 	</p:else>
 </t:if>
-   
+<br />
+
 </html>

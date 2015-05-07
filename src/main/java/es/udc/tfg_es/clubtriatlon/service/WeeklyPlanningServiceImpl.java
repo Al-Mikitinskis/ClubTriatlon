@@ -40,43 +40,52 @@ public class WeeklyPlanningServiceImpl implements WeeklyPlanningService {
 	@Autowired
 	private WeeklyPlanningDao	weeklyPlanningDao;
 	
-	public void save(WeeklyPlanning weeklyPlanning) {
+	public void save(WeeklyPlanning weeklyPlanning)
+	{
 		weeklyPlanningDao.save(weeklyPlanning);
 	}
 	
+	@Transactional(readOnly = true)
 	public WeeklyPlanning getWeeklyPlanningById(Long weeklyPlanningId)
-			throws InstanceNotFoundException {
-		return weeklyPlanningDao.getWeeklyPlanningById(weeklyPlanningId);
+			throws InstanceNotFoundException
+	{
+		return weeklyPlanningDao.find(weeklyPlanningId);
 	}
 	
-	public List<WeeklyPlanning> findWeeklyPlannings(int startIndex, int count) {
+	@Transactional(readOnly = true)
+	public List<WeeklyPlanning> findWeeklyPlannings(int startIndex, int count)
+	{
 		return weeklyPlanningDao.findWeeklyPlannings(startIndex, count);
 	}
 	
-	public List<Planning> orderByTrainingAsc(WeeklyPlanning weeklyPlanning) {
-
+	@Transactional(readOnly = true)
+	public List<Planning> orderByTrainingAsc(WeeklyPlanning weeklyPlanning)
+	{
 		List<Planning> list = new ArrayList<Planning>();
 		list.addAll(weeklyPlanning.getPlannings());
 		Collections.sort(list, new Comparator<Planning>() {
-		    public int compare(Planning p1, Planning p2) {		    	
-		    	return p1.getTraining().getName().compareTo(p2.getTraining().getName());
-		    }
+			public int compare(Planning p1, Planning p2)
+			{
+				return p1.getTraining().getName().compareTo(p2.getTraining().getName());
+			}
 		});
 		return list;
-		
 	}
 	
-	public List<Planning> orderByTrainingDesc(WeeklyPlanning weeklyPlanning) {
+	@Transactional(readOnly = true)
+	public List<Planning> orderByTrainingDesc(WeeklyPlanning weeklyPlanning)
+	{
 		
-//		List<Planning> list = orderByTrainingAsc(weeklyPlanning);
-//		Collections.reverse(list);
-//		return list;
+		// List<Planning> list = orderByTrainingAsc(weeklyPlanning);
+		// Collections.reverse(list);
+		// return list;
 		List<Planning> list = new ArrayList<Planning>();
 		list.addAll(weeklyPlanning.getPlannings());
 		Collections.sort(list, new Comparator<Planning>() {
-		    public int compare(Planning p1, Planning p2) {		    	
-		    	return p2.getTraining().getName().compareTo(p1.getTraining().getName());
-		    }
+			public int compare(Planning p1, Planning p2)
+			{
+				return p2.getTraining().getName().compareTo(p1.getTraining().getName());
+			}
 		});
 		return list;
 		

@@ -53,7 +53,7 @@ public class AdminPlanningWebTest {
 		assertEquals(trainingsManagementLink.getText(), "Gestión de entrenamientos");
 		trainingsManagementLink.click();
 		assertEquals(driver.getCurrentUrl(),
-				"http://localhost:9090/triatlon/admin/plannings/trainingsmanagement");
+				"http://localhost:9090/triatlon/admin/plannings/trainingsmanagement/0");
 		assertEquals(driver.findElement(By.id("menuInfo")).
 				findElement(By.id("menuExplanation")).getText(), "- Tipos de entrenamiento");
 		
@@ -108,7 +108,7 @@ public class AdminPlanningWebTest {
 		driver.getCurrentUrl();
 		driver.findElement(By.id("weeksList")).findElement(By.linkText("2015 - s.7")).click();
 		driver.getCurrentUrl();
-		String tableText = driver.findElement(By.cssSelector("table.weeklyPlanningDetailsTable")).getText();
+		String tableText = driver.findElement(By.cssSelector("table.grid")).getText();
 		assertTrue(tableText.contains("training1"));
 		assertTrue(tableText.contains("training2"));
 		assertTrue(tableText.contains("training3"));

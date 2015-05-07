@@ -46,7 +46,7 @@ public class RoleWebTest {
 		//Can see his menu
 		WebElement planningLink = 
 				driver.findElement(By.id("menuOptions")).findElement(By.id("planningWeekly"));
-		assertEquals(planningLink.getText(), "Planes de entrenamiento");
+		assertEquals(planningLink.getText(), "Entrenamientos");
 		planningLink.click();
 		assertEquals(driver.getCurrentUrl(), 
 				"http://localhost:9090/triatlon/admin/plannings/planningweekly/0");

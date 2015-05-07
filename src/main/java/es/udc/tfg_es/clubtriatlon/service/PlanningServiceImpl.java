@@ -34,12 +34,15 @@ public class PlanningServiceImpl implements PlanningService {
 	@Autowired
 	private PlanningDao	planningDao;
 	
-	public void save(Planning planning) {
+	public void save(Planning planning)
+	{
 		planningDao.save(planning);
 	}
 	
-	public Planning getPlanningById(Long planningId) throws InstanceNotFoundException {
-		return planningDao.getPlanningById(planningId);
+	@Transactional(readOnly = true)
+	public Planning getPlanningById(Long planningId) throws InstanceNotFoundException
+	{
+		return planningDao.find(planningId);
 	}
 	
 }

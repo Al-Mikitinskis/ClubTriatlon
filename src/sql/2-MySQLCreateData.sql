@@ -22,9 +22,10 @@
 -------------------------------------------------------------------------------
 
 DELETE FROM Role;
-DELETE FROM UserProfile;
 DELETE FROM Planning;
+DELETE FROM Training;
 DELETE FROM WeeklyPlanning;
+DELETE FROM UserProfile;
 
 -- WeeklyPlanning --------------------------------------------------------
 -- id, name, cDate
@@ -38,16 +39,16 @@ INSERT INTO WeeklyPlanning VALUES (6, '2015 - s.6', '2015-02-08');
 INSERT INTO WeeklyPlanning VALUES (7, '2015 - s.7', '2015-02-15');
 
 -- Training -------------------------------------------------------------------
--- id, name
+-- id, name, status
 
-INSERT INTO Training VALUES (1, 'training1');
-INSERT INTO Training VALUES (2, 'training2');
-INSERT INTO Training VALUES (3, 'training3');
-INSERT INTO Training VALUES (4, 'Triatlón base');
-INSERT INTO Training VALUES (5, '2015 Peregrinos');
-INSERT INTO Training VALUES (6, 'Ciclismo base');
-INSERT INTO Training VALUES (7, 'Carrera base');
-INSERT INTO Training VALUES (8, 'Natación base');
+INSERT INTO Training VALUES (1, 'training1', 1);
+INSERT INTO Training VALUES (2, 'training2', 1);
+INSERT INTO Training VALUES (3, 'training3', 1);
+INSERT INTO Training VALUES (4, 'Triatlón base', 1);
+INSERT INTO Training VALUES (5, '2015 Peregrinos', 1);
+INSERT INTO Training VALUES (6, 'Ciclismo base', 0);
+INSERT INTO Training VALUES (7, 'Carrera base', 1);
+INSERT INTO Training VALUES (8, 'Natación base', 0);
 
 -- Planning --------------------------------------------------------------
 -- id, name, cDate, wpId, tId
@@ -67,13 +68,13 @@ INSERT INTO Role VALUES (2, 'Usuario');
 -- Passwords ==> 'admin' = 'BLaNeeniglZgQ' 'user' = 'ABsFuZ3PufkXY'
 
 INSERT INTO UserProfile VALUES 
-(1, 'admin1@triatlon.com', 'BLaNeeniglZgQ', 'Administrador1', '1975/01/23', 601601601, '0049005203650360', 1);
+(1, 'admin1@triatlon.com', 'BLaNeeniglZgQ', 'Administrador1', '1975/01/23', 601601601, '0049005203650360', 1, 1);
 INSERT INTO UserProfile VALUES 
-(2, 'admin2@triatlon.com', 'BLaNeeniglZgQ', 'Administrador2', '1977/03/19', 633622611, '0049005201177908', 1);
+(2, 'admin2@triatlon.com', 'BLaNeeniglZgQ', 'Administrador2', '1977/03/19', 633622611, '0049005201177908', 1, 1);
 INSERT INTO UserProfile VALUES 
-(3, 'user1A@gmail.com', 'ABsFuZ3PufkXY', 'Usuario 1A', '1979/07/15', 666000258, '0049005202540258', 2);
+(3, 'user1A@gmail.com', 'ABsFuZ3PufkXY', 'Usuario 1A', '1979/07/15', 666000258, '0049005202540258', 2, 1);
 INSERT INTO UserProfile VALUES 
-(4, 'user2B@gmail.com', 'ABsFuZ3PufkXY', 'Usuario 2B', '1983/03/22', 666210210, '0049005225747471', 2);
+(4, 'user2B@gmail.com', 'ABsFuZ3PufkXY', 'Usuario 2B', '1983/03/22', 666210210, '0049005225747471', 2, 1);
 INSERT INTO UserProfile VALUES 
-(5, 'user3C@gmail.com', 'ABsFuZ3PufkXY', 'Usuario 3C', '1991/02/03', 667557447, '0049005200025883', 2);
+(5, 'user3C@gmail.com', 'ABsFuZ3PufkXY', 'Usuario 3C', '1991/02/03', 667557447, '0049005200025883', 2, 1);
 

@@ -33,8 +33,6 @@ public interface RoleDao extends GenericDao<Role, Long>{
      */
     public String getRoleNameByUserEmail(String email) throws InstanceNotFoundException;
     
-    public Role getRoleById(Long id) throws InstanceNotFoundException;
-    
     public Role getRoleByName(String name) throws InstanceNotFoundException;
 
     /**

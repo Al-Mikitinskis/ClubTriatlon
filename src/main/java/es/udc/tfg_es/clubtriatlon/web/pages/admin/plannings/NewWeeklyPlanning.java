@@ -19,7 +19,6 @@ Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 Contact here: alejandro.mikitinskis@udc.es */
 
 import org.apache.shiro.SecurityUtils;
-
 import es.udc.tfg_es.clubtriatlon.web.services.AuthenticationPolicy;
 import es.udc.tfg_es.clubtriatlon.web.services.AuthenticationPolicyType;
 
@@ -28,6 +27,6 @@ public class NewWeeklyPlanning {
 
 	public boolean isAdmin() {
 		return SecurityUtils.getSubject().hasRole("Administrador");
-	}	
-	
+	}
+
 }

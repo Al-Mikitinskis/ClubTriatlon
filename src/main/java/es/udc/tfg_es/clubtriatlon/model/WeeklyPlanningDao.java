@@ -22,12 +22,8 @@ package es.udc.tfg_es.clubtriatlon.model;
 import java.util.List;
 
 import es.udc.tfg_es.clubtriatlon.utils.dao.GenericDao;
-import es.udc.tfg_es.clubtriatlon.utils.exceptions.InstanceNotFoundException;
 
 public interface WeeklyPlanningDao extends GenericDao<WeeklyPlanning, Long> {
-	
-	public WeeklyPlanning getWeeklyPlanningById(Long weeklyPlanningId)
-			throws InstanceNotFoundException;
 	
 	/**
 	 * Returns the list of 'WeeklyPlannings' order desc. 'count' elements

@@ -24,29 +24,14 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import es.udc.tfg_es.clubtriatlon.utils.dao.GenericDaoHibernate;
-import es.udc.tfg_es.clubtriatlon.utils.exceptions.InstanceNotFoundException;
 
 @Repository("WeeklyPlanningDao")
 public class WeeklyPlanningDaoHibernate extends GenericDaoHibernate<WeeklyPlanning, Long>
 		implements WeeklyPlanningDao {
 	
-	public WeeklyPlanning getWeeklyPlanningById(Long weeklyPlanningId)
-			throws InstanceNotFoundException {
-		WeeklyPlanning weeklyPlanning = (WeeklyPlanning) getSession()
-				.createQuery(
-						"SELECT wp FROM WeeklyPlanning wp WHERE wp.weeklyPlanningId = :weeklyPlanningId")
-				.setParameter("weeklyPlanningId", weeklyPlanningId).uniqueResult();
-		if (weeklyPlanning == null) {
-			throw new InstanceNotFoundException(weeklyPlanningId,
-					WeeklyPlanning.class.getName());
-		} else {
-			return weeklyPlanning;
-		}
-	}
-	
 	@SuppressWarnings("unchecked")
-	public List<WeeklyPlanning> findWeeklyPlannings(int startIndex, int count) {
-		
+	public List<WeeklyPlanning> findWeeklyPlannings(int startIndex, int count)
+	{
 		return getSession()
 				.createQuery("SELECT wp FROM WeeklyPlanning wp ORDER BY wp.creationDate DESC")
 				.setFirstResult(startIndex).setMaxResults(count).list();

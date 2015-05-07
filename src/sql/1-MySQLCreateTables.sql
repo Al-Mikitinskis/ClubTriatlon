@@ -49,8 +49,9 @@ CREATE INDEX WeeklyPlanningIndexById ON WeeklyPlanning (id);
 -- Training --------------------------------------------------------------
 
 CREATE TABLE Training (
-    id    BIGINT NOT NULL AUTO_INCREMENT,
-    name  VARCHAR(25) NOT NULL,
+    id     BIGINT NOT NULL AUTO_INCREMENT,
+    name   VARCHAR(25) NOT NULL,
+    status BIT DEFAULT 1,
     CONSTRAINT WeeklyPlanningPK PRIMARY KEY (id),
     CONSTRAINT WeeklyPlanningUniqueKey UNIQUE (name) ) 
     ENGINE = InnoDB;
@@ -70,7 +71,7 @@ CREATE TABLE Planning (
     CONSTRAINT WpIdFK FOREIGN KEY(wpId)
         REFERENCES WeeklyPlanning(id),
     CONSTRAINT TIdFK FOREIGN KEY(tId)
-        REFERENCES Training(id) ) 
+        REFERENCES Training(id) ON DELETE CASCADE ) 
     ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 CREATE INDEX PlanningIndexById ON Planning (id);
@@ -98,10 +99,13 @@ CREATE TABLE UserProfile (
     phoneNumber VARCHAR(10) NULL,
     account     VARCHAR(40) NOT NULL,
     role        BIGINT NOT NULL,
+    training    BIGINT,
     CONSTRAINT UserProfilePK PRIMARY KEY (usrId),
     CONSTRAINT EmailUniqueKey UNIQUE (email),
     CONSTRAINT RoleIdFK FOREIGN KEY(role)
-        REFERENCES Role(roleId) ON DELETE CASCADE ) 
+        REFERENCES Role(roleId) ON DELETE CASCADE,
+    CONSTRAINT TrainingIdFK FOREIGN KEY(training)
+        REFERENCES Training(id) ) 
     ENGINE = InnoDB;
 
 CREATE INDEX UserProfileIndexByUsrId ON UserProfile (usrId);

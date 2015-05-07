@@ -19,11 +19,21 @@ package es.udc.tfg_es.clubtriatlon.model;
 
  Contact here: alejandro.mikitinskis@udc.es */
 
+import java.util.List;
+
 import es.udc.tfg_es.clubtriatlon.utils.dao.GenericDao;
 import es.udc.tfg_es.clubtriatlon.utils.exceptions.InstanceNotFoundException;
 
 public interface TrainingDao extends GenericDao<Training, Long> {
 	
-	public Training getTrainingById(Long trainingId) throws InstanceNotFoundException;
+	public List<Training> getAllTrainings();
 	
+	public List<Training> getActiveTrainings();
+	
+	public Training getTrainingByName(String name) throws InstanceNotFoundException;
+	
+//	public List<Training> getAllTrainingsOrderByName();
+//	
+//	public List<Training> getAllTrainingsOrderByStatusActive();
+
 }

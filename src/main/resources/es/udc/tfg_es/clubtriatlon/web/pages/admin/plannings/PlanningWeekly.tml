@@ -24,9 +24,9 @@
 <t:if test="admin">
 	<p>
 		<a href="#" id="trainingsManagement" t:type="PageLink"
-			t:page="admin/plannings/TrainingsManagement">
-<!-- 			${message:trainingsManagement} -->
-			Gestión de entrenamientos</a>
+			t:page="admin/plannings/TrainingsManagement"
+			t:context="0">
+			${message:trainingsManagement}</a>
 	</p>
 	<p>
 		<a href="#" id="newWeeklyPlanning" t:type="PageLink"
@@ -83,8 +83,7 @@
 	<p:else>
 		Área autorizada para administradores<br />
 		<br />
-		<a href="#" id="indexPage" t:type="PageLink" t:page="Index"> Ir a
-			inicio </a>
+		<a href="#" id="indexPage" t:type="PageLink" t:page="Index"> ${message:goToIndex} </a>
 	</p:else>
 </t:if>
 

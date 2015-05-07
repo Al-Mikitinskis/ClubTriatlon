@@ -1,4 +1,5 @@
 package es.udc.tfg_es.clubtriatlon.model;
+
 /* BSD License */
 
 import javax.persistence.Column;
@@ -15,114 +16,147 @@ import es.udc.tfg_es.clubtriatlon.model.Role;
 
 @Entity
 public class UserProfile {
-
-	private Long   userProfileId;
-	private String email;
-	private String encryptedPassword;
-	private String name;
-	private String birthDate;
-	private int    phoneNumber;
-	private String account;
-	private Role   role;
-
-	public UserProfile() {
-	}
-
-	public UserProfile(String email, String encryptedPassword, String name,
-			String birthDate, int phoneNumber, String account, Role role) {
+	
+	private Long		userProfileId;
+	private String		email;
+	private String		encryptedPassword;
+	private String		name;
+	private String		birthDate;
+	private int			phoneNumber;
+	private String		account;
+	private Role		role;
+	private Training	training;
+	
+	public UserProfile() {}
+	
+	public UserProfile(String email, String encryptedPassword, String name, String birthDate,
+			int phoneNumber, String account, Role role)
+	{
 		
-		/* NOTE: "userProfileId" *must* be left as "null" since its value is
-		 * automatically generated. */
+		/*
+		 * NOTE: "userProfileId" *must* be left as "null" since its value is
+		 * automatically generated.
+		 */
 		
-		this.email             = email;
+		this.email = email;
 		this.encryptedPassword = encryptedPassword;
-		this.name              = name;
-		this.birthDate         = birthDate;
-		this.phoneNumber       = phoneNumber;
-		this.account           = account;
-		this.role              = role;
+		this.name = name;
+		this.birthDate = birthDate;
+		this.phoneNumber = phoneNumber;
+		this.account = account;
+		this.role = role;
+		this.training = null;
 	}
-
+	
 	@Column(name = "usrId")
-	@SequenceGenerator(              // It only takes effect for
+	@SequenceGenerator( // It only takes effect for
 	name = "UserProfileIdGenerator", // databases providing identifier
-	sequenceName = "UserProfileSeq") // generators.
+	sequenceName = "UserProfileSeq")
+	// generators.
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "UserProfileIdGenerator")
-	
-	public Long getUserProfileId() {
+	public Long getUserProfileId()
+	{
 		return userProfileId;
 	}
-
-	public void setUserProfileId(Long userProfileId) {
+	
+	public void setUserProfileId(Long userProfileId)
+	{
 		this.userProfileId = userProfileId;
 	}
-
-	public String getEmail() {
+	
+	public String getEmail()
+	{
 		return email;
 	}
-
-	public void setEmail(String email) {
+	
+	public void setEmail(String email)
+	{
 		this.email = email;
 	}
-
+	
 	@Column(name = "enPassword")
-	public String getEncryptedPassword() {
+	public String getEncryptedPassword()
+	{
 		return encryptedPassword;
 	}
-
-	public void setEncryptedPassword(String encryptedPassword) {
+	
+	public void setEncryptedPassword(String encryptedPassword)
+	{
 		this.encryptedPassword = encryptedPassword;
 	}
-
-	public String getName() {
+	
+	public String getName()
+	{
 		return name;
 	}
-
-	public void setName(String name) {
+	
+	public void setName(String name)
+	{
 		this.name = name;
 	}
 	
-	public String getBirthDate() {
+	public String getBirthDate()
+	{
 		return birthDate;
 	}
-
-	public void setBirthDate(String birthDate) {
+	
+	public void setBirthDate(String birthDate)
+	{
 		this.birthDate = birthDate;
 	}
-
-	public int getPhoneNumber() {
+	
+	public int getPhoneNumber()
+	{
 		return phoneNumber;
 	}
-
-	public void setPhoneNumber(int phoneNumber) {
+	
+	public void setPhoneNumber(int phoneNumber)
+	{
 		this.phoneNumber = phoneNumber;
 	}
-
-	public String getAccount() {
+	
+	public String getAccount()
+	{
 		return account;
 	}
-
-	public void setAccount(String account) {
+	
+	public void setAccount(String account)
+	{
 		this.account = account;
 	}
 	
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "role")
-	public Role getRole() {
+	public Role getRole()
+	{
 		return role;
 	}
-
-	public void setRole(Role role) {
+	
+	public void setRole(Role role)
+	{
 		this.role = role;
 	}
-
-	@Override
-	public String toString() {
-		return "UserProfile [userProfileId=" + userProfileId + ", email="
-				+ email + ", encryptedPassword=" + encryptedPassword
-				+ ", name=" + name + ", birthDate=" + birthDate
-				+ ", phoneNumber=" + phoneNumber + ", account=" + account + "]";
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "training")
+	public Training getTraining()
+	{
+		return this.training;
 	}
-
+	
+	public void setTraining(Training training)
+	{
+		this.training = training;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return "UserProfile [userProfileId=" + userProfileId + ", email=" + email
+				+ ", encryptedPassword=" + encryptedPassword + ", name=" + name
+				+ ", birthDate=" + birthDate + ", phoneNumber=" + phoneNumber + ", account="
+				+ account + ", role=" + role + ", training=" + training + "]";
+	}
+	
 }

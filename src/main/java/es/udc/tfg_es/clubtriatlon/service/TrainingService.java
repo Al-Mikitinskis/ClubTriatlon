@@ -19,13 +19,34 @@ package es.udc.tfg_es.clubtriatlon.service;
 
  Contact here: alejandro.mikitinskis@udc.es */
 
+import java.util.List;
+
 import es.udc.tfg_es.clubtriatlon.model.Training;
+import es.udc.tfg_es.clubtriatlon.utils.exceptions.DuplicateInstanceException;
 import es.udc.tfg_es.clubtriatlon.utils.exceptions.InstanceNotFoundException;
 
 public interface TrainingService {
 	
-	public void save(Training training);
+	public void save(Training training) throws DuplicateInstanceException;
+	
+	public boolean remove(Long trainingId) throws InstanceNotFoundException;
+	
+	public boolean changeStatus(Long trainingId) throws InstanceNotFoundException;
+	
+	public void changeName(Long trainingId, String name) throws InstanceNotFoundException;
 	
 	public Training getTrainingById(Long trainingId) throws InstanceNotFoundException;
 	
+//	public Training getTrainingByName(String name) throws InstanceNotFoundException;
+	
+	public List<Training> getAllTrainings();
+	
+	public List<Training> getActiveTrainings();
+	
+	public List<Training> orderById(List<Training> list);
+	
+	public List<Training> orderByStatusActive(List<Training> list);
+	
+	public List<Training> orderByName(List<Training> list);
+
 }

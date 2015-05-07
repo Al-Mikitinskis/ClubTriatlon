@@ -19,6 +19,8 @@ package es.udc.tfg_es.clubtriatlon.model;
 
  Contact here: alejandro.mikitinskis@udc.es */
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import es.udc.tfg_es.clubtriatlon.utils.dao.GenericDaoHibernate;
@@ -26,18 +28,43 @@ import es.udc.tfg_es.clubtriatlon.utils.exceptions.InstanceNotFoundException;
 
 @Repository("TrainingDao")
 public class TrainingDaoHibernate extends GenericDaoHibernate<Training, Long> implements
-TrainingDao {
+		TrainingDao {
 	
-	public Training getTrainingById(Long trainingId) throws InstanceNotFoundException {
+	@SuppressWarnings("unchecked")
+	public List<Training> getAllTrainings()
+	{
+		return getSession().createQuery("SELECT t FROM Training t").list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Training> getActiveTrainings()
+	{
+		return getSession().createQuery(
+				"SELECT t FROM Training t WHERE t.status = true ORDER BY t.name").list();
+	}
+	
+	public Training getTrainingByName(String name) throws InstanceNotFoundException {
 		Training training = (Training) getSession().createQuery(
-    			"SELECT t FROM Training t WHERE t.id = :trainingId")
-    			.setParameter("trainingId", trainingId)
+    			"SELECT t FROM Training t WHERE t.name = :name")
+    			.setParameter("name", name)
     			.uniqueResult();
     	if (training == null) {
-   			throw new InstanceNotFoundException(trainingId, Training.class.getName());
+   			throw new InstanceNotFoundException(name, Training.class.getName());
     	} else {
     		return training;
     	}
 	}
+	
+//	@SuppressWarnings("unchecked")
+//	public List<Training> getAllTrainingsOrderByName()
+//	{
+//		return getSession().createQuery("SELECT t FROM Training t ORDER BY t.name").list();
+//	}
+//	
+//	@SuppressWarnings("unchecked")
+//	public List<Training> getAllTrainingsOrderByStatusActive()
+//	{
+//		return getSession().createQuery("SELECT t FROM Training t ORDER BY t.name").list();
+//	}
 	
 }

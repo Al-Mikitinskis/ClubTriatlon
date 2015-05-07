@@ -24,11 +24,11 @@
 	<p class="welcome">
     	Pág.Nuevo plan de entrenamiento semanal
 	</p>
-	
+
 	<p:else>
 		Área autorizada para administradores<br/><br/>
 		<a href="#" id="indexPage" t:type="PageLink" t:page="Index">
-			Ir a inicio
+			${message:goToIndex}
 		</a>
 	</p:else>
 </t:if>

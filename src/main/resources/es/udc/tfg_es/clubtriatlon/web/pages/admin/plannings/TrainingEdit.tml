@@ -1,0 +1,83 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+	xmlns:p="tapestry:parameter" t:type="Layout" t:pageTitle="title"
+	t:menuExplanation="menuExplanation">
+<!-- ClubTriatlon: a web app to management of administrative work of a triathlon club
+     Copyright (C) 2015 Alejandro Mikitinskis
+
+     This program is free software; you can redistribute it and/or modify
+     it under the terms of the GNU General Public License as published by
+     the Free Software Foundation; either version 3 of the License, or
+     (at your option) any later version.
+
+     This program is distributed in the hope that it will be useful,
+     but WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     GNU General Public License for more details.
+
+     You should have received a copy of the GNU General Public License
+     along with this program; if not, write to the Free Software Foundation,
+     Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+
+     Contact here: alejandro.mikitinskis@udc.es -->
+
+<br />
+<t:if test="admin">
+
+	<t:if test="validTraining">
+
+		<h4>${message:changeName}</h4><br />
+		
+		<form t:type="Form" t:id="trainingEditForm">
+			<t:errors />
+			<span class="entry">
+				<input t:id="name" t:type="TextField"
+				size="16" t:validate="required" maxlength="24" />
+				<input type="submit" id="editButton" value="${message:editButton}" />
+			</span>
+		</form>
+	
+		<br /><br />
+		<h4>${message:deleteTraining}</h4>
+
+		<t:if test="!training.status">
+			<t:zone t:id="deleteZone" id="deleteZone">
+				<t:if test="!showConfirmDelete">
+					<a t:type="eventlink" t:event="deleteShowConfirm" href="#" zone="deleteZone">
+						<img src="${context:/images/delete.png}" />
+					</a>
+				</t:if>
+				<t:if test="showConfirmDelete">
+					${message:areYouSure}<br /><br />
+					<a t:type="eventlink" t:event="deleteYes" href="#" zone="deleteZone">
+						<img src="${context:/images/led_circle_green_24.png}" />
+					</a>
+					&nbsp; &nbsp;
+<!-- 					&nbsp; ${message:askYes} &nbsp; / &nbsp; ${message:askNo} &nbsp; -->
+					<a t:type="eventlink" t:event="deleteNo" href="#" zone="deleteZone">
+						<img src="${context:/images/led_circle_red_24.png}" />
+					</a>
+				</t:if>
+			</t:zone>
+		</t:if>
+		
+	
+		<p:else>
+			${message:trainingNotExist}
+		</p:else>
+	</t:if>
+
+	<br />
+	<a href="#" t:type="PageLink" t:page="admin/plannings/TrainingsManagement"
+		t:context="order"> ${message:backLink}</a>
+	<br />
+
+	<p:else>
+		Área autorizada para administradores<br />
+		<br />
+		<a href="#" id="indexPage" t:type="PageLink" t:page="Index">
+			${message:goToIndex} </a>
+	</p:else>
+</t:if>
+<br />
+
+</html>

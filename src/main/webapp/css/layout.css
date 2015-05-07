@@ -22,7 +22,6 @@ Contact here: alejandro.mikitinskis@udc.es */
 /* BIG DESKTOPS +1200px */
 
 /* *******************  Body  ********************* */
-
 html, body {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
@@ -33,7 +32,6 @@ html, body {
 }
 
 /* ===================  Window  =================== */
-
 #window {
 	background-color: #d2d2d2;
 	width: 100%;
@@ -41,14 +39,13 @@ html, body {
 }
 
 /* =================  Page title  ================= */
-
 #pageTitle {
 	background-color: #d2d2d2;
 	width: 100%;
 	height: 20%;
-/*     color: #121212; */
-/*     text-align: center; */
-/*     font-weight: bold; */
+	/*     color: #121212; */
+	/*     text-align: center; */
+	/*     font-weight: bold; */
 }
 
 #pageTitle img {
@@ -59,28 +56,26 @@ html, body {
 }
 
 /* =================  Menu info  ================== */
-
 #menuInfo {
-    background-color: #2f2f2f;
-    color: #ffffff;
-    text-align: left;
-    width: 100%;
-    height: 3%;
-    padding-top: 0.85%;
-    padding-bottom: 0.85%;
+	background-color: #2f2f2f;
+	color: #ffffff;
+	text-align: left;
+	width: 100%;
+	height: 14px;
+	padding-top: 0.5%;
+	padding-bottom: 0.5%;
 }
 
 #menuWelcome {
-    font-weight: bold;
-    padding-left: 0.5%;
+	font-weight: bold;
+	padding-left: 0.5%;
 }
 
 #menuExplanation {
-
+	
 }
 
 /* ================  Menu options  ================ */
-
 #menuOptions {
 	width: 100%;
 	background: #ee5609;
@@ -118,14 +113,14 @@ html, body {
 }
 
 #menuOptions nav ul li a img {
-/* Si todas las imágenes fueran iguales... */
-	display:block;
+	/* Si todas las imágenes fueran iguales... */
+	display: block;
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 2px;
-/* 	width: 20%;  */
-/* 	height: 20%; */
-/* 	margin-right: 2px; */
+	/* 	width: 20%;  */
+	/* 	height: 20%; */
+	/* 	margin-right: 2px; */
 }
 
 #menuOptions nav ul li a:hover {
@@ -135,15 +130,15 @@ html, body {
 }
 
 /* ===================  Content  ================== */
-
 #content {
 	width: 100%;
-	float: center;    
+	float: center;
 	text-align: center;
-	background-color:#fff;
+	background-color: #fff;
 	border-top: #fff 2px solid;
 	border-bottom: #fff 5px solid;
-/*     min-height: 55%; */
+	/* 	overflow: scroll; */
+	/* 	min-height: 55%; */
 }
 
 /* p.welcome { */
@@ -151,7 +146,6 @@ html, body {
 /* } */
 
 /* -----------------  Body links  ----------------- */
-
 a {
 	font-weight: bold;
 	text-decoration: none;
@@ -159,11 +153,16 @@ a {
 }
 
 a:hover {
-	text-decoration:underline;
+	text-decoration: underline;
+}
+
+hr { 
+  background-color: #2f2f2f;
+  height: 1.5px;
+  width: 60%;
 }
 
 /* -------------------- Forms  -------------------- */
-
 form {
 	width: 100%;
 }
@@ -179,14 +178,14 @@ div.field {
 }
 
 div.field label {
-	float: left;    
+	float: left;
 	text-align: right;
 	font-weight: bold;
 	width: 49.5%;
 }
 
 div.field span.entry {
-	float: right;    
+	float: right;
 	text-align: left;
 	width: 49.5%;
 }
@@ -198,18 +197,63 @@ div.button {
 	width: 100%;
 }
 
-input, select, textarea  {
+/* -------------------  Tables  ------------------- */
+table.grid {
+	border-collapse: collapse;
+	border-spacing: 0;
+/* 	border: 1px solid #dddddd; */
+}
+
+table.grid th {
+	background: #2f2f2f;
+	color: #ffffff;
+	margin-left: 2px;
+	margin-right: 2px;
+	padding-left: 3.5px;
+	padding-right: 3.5px;
+	border: 1px solid #dddddd;
+}
+
+table.grid tr:nth-child(odd) td {
+	background: #dfdfdf;
+}
+
+table.grid tr:nth-child(even) td {
+	background: #eeeeee;
+}
+
+table.grid td {
+	text-align: center;
+}
+
+table.grid td.leftColumn {
+	text-align: left;
+	margin-left: 2px;
+	margin-right: 2px;
+	padding-left: 3.5px;
+	padding-right: 3.5px;
+}
+
+
+input, select, textarea {
 	background-color: #d2d2d2;
 }
 
-/* ---------------  Error messages  --------------- */
+input#imageSubmit {
+	background: #ffffff;
+}
 
+input#imageSubmitBorder {
+	background: #ffffff;
+	border: 1px solid #2f2f2f;
+}
+
+/* ---------------  Error messages  --------------- */
 div.t-error ul {
 	font-weight: bold;
 }
 
 /* ===================  Footer  =================== */
-
 #footer {
 	clear: both;
 	background: #2f2f2f;
@@ -222,84 +266,72 @@ div.t-error ul {
 	width: 100%;
 	border-top: #2f2f2f 1px solid;
 	border-bottom: #2f2f2f 1px solid;
-/* 	min-height:5%; */
+	/* 	min-height:5%; */
 }
 
 /* *****************  Media Query  ******************* */
 
 /* LANDSCAPE TABLETS and NORMAL DESKTOPS */
 @media (max-width: 1199px) {
-	
 	html, body {
-		font-size: 12px;
+		font-size: 13px;
 	}
-	
+	#menuInfo {
+		height: 13px;
+	}
 	#menuOptions nav ul li {
 		min-width: 12.5%;
 	}
-
 	#menuOptions nav ul li a {
-		font-size: 14px;
+		font-size: 15px;
 		padding: 8px;
 	}
-	
-	div.field label {
-		width: 39.5%;
-	}
-
-	div.field span.entry {
-		width: 59.5%;
-	}
-	
-	div.button input {
-		font-size: 12px;
-	}
-	
 	/* Content, Forms */
-	
 	div.button input {
-		font-size: 10px;
+		font-size: 13px;
 	}
-	
 	div.field {
-		display:block;
-	    clear: both;
-	    padding-top: 1em;
-	    width: 100%;
+		display: block;
+		clear: both;
+		padding-top: 1em;
+		width: 100%;
 	}
-	
 	div.field label {
-	    float: center;    
-	    text-align: center;
-	    font-weight: bold;
-	    width: 100%;
+		float: center;
+		text-align: center;
+		font-weight: bold;
+		width: 100%;
 	}
-	
 	div.field span.entry {
 		display: block;
-	    float: center;    
-	    text-align: center;
-	    width: 100%;
-	    
+		float: center;
+		text-align: center;
+		width: 100%;
 	}
-	
 	div.field span.entry input {
-		width:30%;
+		width: 30%;
+	}
+	div.field span.entry div {
+		display: block;
 	}
 	
-	div.field span.entry div{
-		display: block;
+	/* hide the logo when width>height */
+	@media (max-width: 767px) and (orientation:landscape) {
+		#pageTitle {
+			display: none;
+		}
 	}
 
 	/* PORTRAIT TABLETS and LANDSCAPE MOBILES */
 	@media (max-width: 767px) {
-	
 		body {
-			font-size: 10px;
+			font-size: 12px;
 		}
-	
 		/* Menu */
-	
+		#menuInfo {
+			height: 12px;
+			overflow: scroll;
+		}
 		#menuFace {
 			display: block;
 			width: 100%;
@@ -307,108 +339,115 @@ div.t-error ul {
 			padding-bottom: 2px;
 			border-bottom: #fff 1px solid;
 		}
-	
 		#menuFace #menuFaceButton {
 			display: block;
 			padding: 0.04%;
 			background: #ee5609;
-	/* 		color:#fff; */
-	/* 		text-decoration:none; */
-	/* 		font-weight: bold; */
-	/* 		font-size:12px; */
-			width: 4%; 
+			/* 		color:#fff; */
+			/* 		text-decoration:none; */
+			/* 		font-weight: bold; */
+			/* 		font-size:12px; */
+			width: 4%;
 			height: 4%;
 			-webkit-box-sizing: border-box;
 			-moz-box-sizing: border-box;
 			box-sizing: border-box;
 		}
-	
-	/* 	#menuFace span { */
-	/* 		float: right; */
-	/* 	} */
-		
+		/* 	#menuFace span { */
+		/* 		float: right; */
+		/* 	} */
 		#menuOptions nav {
-			width: 40%;
+			width: 45%;
 			height: 100%;
 			left: -100%;
 			margin: 0;
 			position: fixed;
 		}
-		
 		#menuOptions nav ul li {
 			display: block;
 			float: none;
 			border-bottom: #fff 1px solid;
 		}
-	
 		#menuOptions nav ul li a {
-			font-size: 12px;
-			padding: 8px;
+			font-size: 14px;
+			padding: 10px;
 			text-align: left;
 		}
-		
 		#menuOptions nav ul li a img {
-			display:inline;
-			width: 6%; 
-			height: 6%;
+			display: inline;
+			width: 7.5%;
+			height: 7.5%;
 		}
-		
 		div.field span.entry input {
-			width:40%;
+			width: 40%;
 		}
-	
-		
+		div.button input {
+			font-size: 12px;
+		}
+
 		/* PORTRAIT MOBILES */
-		@media (max-width:480px) {
-		
+		@media (max-width: 480px) {
 			html, body {
-				font-size: 8px;
+				font-size: 11px;
 			}
-	
+			#menuInfo {
+				height: 11px;
+			}
 			#menuOptions nav ul li a {
-				font-size: 10px;
-				padding: 10px;
+				font-size: 13px;
+				padding: 9px;
 			}
-			
 			#menuOptions nav {
-				width:40%;
+				width: 55%;
 			}
-			
 			div.button input {
-				font-size: 8px;
+				font-size: 11px;
 			}
-	
+			hr { 
+			  width: 80%;
+			}
 		}
-		
+
 		/* PORTRAIT SMALL MOBILES */
-		@media (max-width:240px) {
-	
+		@media (max-width: 320px) {
 			html, body {
-				font-size: 7px;
+				font-size: 10px;
 			}
-			
+			#menuInfo {
+				height: 10px;
+				overflow: scroll;
+			}
+			#menuOptions nav ul li a {
+				font-size: 12px;
+				padding: 8px;
+			}
 			#menuOptions nav {
-				width:80%;
+				width: 65%;
 			}
-			
 			div.button input {
-				font-size: 7px;
+				font-size: 10px;
 			}
-	
+		}
+
+		/* PORTRAIT SMALL MOBILES */
+		@media (max-width :240px) {
+			html, body {
+				font-size: 9px;
+			}
+			#menuInfo {
+				height: 9px;
+				overflow: scroll;
+			}
+			#menuOptions nav ul li a {
+				font-size: 11px;
+				padding: 7px;
+			}
+			#menuOptions nav {
+				width: 75%;
+			}
+			div.button input {
+				font-size: 9px;
+			}
 		}
 	}
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

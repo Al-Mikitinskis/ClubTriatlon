@@ -22,22 +22,9 @@ package es.udc.tfg_es.clubtriatlon.model;
 import org.springframework.stereotype.Repository;
 
 import es.udc.tfg_es.clubtriatlon.utils.dao.GenericDaoHibernate;
-import es.udc.tfg_es.clubtriatlon.utils.exceptions.InstanceNotFoundException;
 
 @Repository("PlanningDao")
 public class PlanningDaoHibernate extends GenericDaoHibernate<Planning, Long> implements
 		PlanningDao {
-	
-	public Planning getPlanningById(Long planningId) throws InstanceNotFoundException {
-		Planning planning = (Planning) getSession().createQuery(
-    			"SELECT p FROM Planning p WHERE p.id = :planningId")
-    			.setParameter("planningId", planningId)
-    			.uniqueResult();
-    	if (planning == null) {
-   			throw new InstanceNotFoundException(planningId, Planning.class.getName());
-    	} else {
-    		return planning;
-    	}
-	}
 	
 }
