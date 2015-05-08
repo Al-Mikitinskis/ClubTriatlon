@@ -28,6 +28,8 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -41,11 +43,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.udc.tfg_es.clubtriatlon.service.PlanningService;
+import es.udc.tfg_es.clubtriatlon.service.UserService;
 import es.udc.tfg_es.clubtriatlon.service.WeeklyPlanningService;
 import es.udc.tfg_es.clubtriatlon.service.TrainingService;
+import es.udc.tfg_es.clubtriatlon.utils.UserProfileDetails;
 import es.udc.tfg_es.clubtriatlon.utils.exceptions.DuplicateInstanceException;
 import es.udc.tfg_es.clubtriatlon.model.Planning;
+import es.udc.tfg_es.clubtriatlon.model.Role;
 import es.udc.tfg_es.clubtriatlon.model.Training;
+import es.udc.tfg_es.clubtriatlon.model.UserProfile;
 import es.udc.tfg_es.clubtriatlon.model.WeeklyPlanning;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -57,13 +63,42 @@ public class WeeklyPlanningServiceTest {
 	private WeeklyPlanningService	weeklyPlanningService;
 	
 	@Autowired
-	private PlanningService	planningService;
+	private PlanningService			planningService;
 	
 	@Autowired
-	private TrainingService	trainingService;
+	private TrainingService			trainingService;
+	
+	@Autowired
+	private UserService				userService;
+	
+	@SuppressWarnings("deprecation")
+	@Test
+	public void testCreateWeeklyPlanning() throws ParseException, DuplicateInstanceException
+	{
+		Planning planning1 = new Planning();
+		Planning planning2 = new Planning();
+		Set<Planning> plannings = new HashSet<Planning>();
+		plannings.add(planning1);
+		plannings.add(planning2);
+		
+		WeeklyPlanning wp = new WeeklyPlanning("9", plannings);
+		weeklyPlanningService.save(wp);
+		
+		Date date = new Date();
+		assertTrue(wp.getCreationDate().getDay() == date.getDay()
+				&& wp.getCreationDate().getMonth() == date.getMonth()
+				&& wp.getCreationDate().getYear() == date.getYear());
+		
+		String wpName = date.getYear() + " - s.09";
+		assertTrue(wp.getName().compareTo(wpName) == 0);
+		
+		assertTrue(wp.getPlannings().size() == 2 && wp.getPlannings().contains(planning1)
+				&& wp.getPlannings().contains(planning2));
+	}
 	
 	@Test
-	public void testFindWeeklyPlannings() throws ParseException {
+	public void testFindWeeklyPlannings() throws ParseException, DuplicateInstanceException
+	{
 		
 		Set<Planning> list = new HashSet<Planning>();
 		
@@ -116,7 +151,8 @@ public class WeeklyPlanningServiceTest {
 	}
 	
 	@Test
-	public void testGetPlannings() throws DuplicateInstanceException {
+	public void testGetPlannings() throws DuplicateInstanceException
+	{
 		
 		WeeklyPlanning weeklyPlanning = new WeeklyPlanning("weeklyPlanning");
 		weeklyPlanningService.save(weeklyPlanning);
@@ -138,20 +174,85 @@ public class WeeklyPlanningServiceTest {
 		
 		weeklyPlanning.setPlannings(plannings);
 		
-
 		List<Planning> planningsAsc = weeklyPlanningService.orderByTrainingAsc(weeklyPlanning);
 		assertTrue(planningsAsc.size() == 3);
 		assertEquals(planning1.getName(), planningsAsc.get(0).getName());
 		assertEquals(planning2.getName(), planningsAsc.get(1).getName());
 		assertEquals(planning3.getName(), planningsAsc.get(2).getName());
 		
-
-		List<Planning> planningsDesc = weeklyPlanningService.orderByTrainingDesc(weeklyPlanning);
+		List<Planning> planningsDesc = weeklyPlanningService
+				.orderByTrainingDesc(weeklyPlanning);
 		assertTrue(planningsDesc.size() == 3);
 		assertEquals(planning3.getName(), planningsDesc.get(0).getName());
 		assertEquals(planning2.getName(), planningsDesc.get(1).getName());
 		assertEquals(planning1.getName(), planningsDesc.get(2).getName());
 		
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Test
+	public void testPublishPlanning() throws ParseException, DuplicateInstanceException
+	{
+		Training training1 = new Training("training1");
+		Training training2 = new Training("training2");
+		training2.setStatus(false);
+		trainingService.save(training1);
+		trainingService.save(training2);
+		
+		UserProfile user1 = userService.registerUser("user1@gmail.com", "user",
+				new UserProfileDetails("n", "b", 0, "a"), new Role("r"));
+		userService.assignTraining(user1.getUserProfileId(), training1);
+		
+		Planning planning1 = new Planning();
+		planning1.setName("planing1");
+		
+		List<Training> trainings = trainingService.getActiveTrainings();
+		assertTrue(trainings.size() == 1);
+				
+		//Training, Planning
+		weeklyPlanningService.publishPlanning(trainings.get(0), planning1);
+		
+		assertTrue(planning1.getName().compareTo(user1.getActualPlanning.getName()));
+		assertTrue(planning1.getCreationDate().equals(
+				user1.getActualPlanning.getCreationDate()));
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Test
+	public void testPublishAllPlannings() throws ParseException, DuplicateInstanceException
+	{
+		Training training1 = new Training("training1");
+		Training training2 = new Training("training2");
+		trainingService.save(training1);
+		trainingService.save(training2);
+		
+		UserProfile user1 = userService.registerUser("user1@gmail.com", "user",
+				new UserProfileDetails("n", "b", 0, "a"), new Role("r"));
+		userService.assignTraining(user1.getUserProfileId(), training1);
+		UserProfile user2 = userService.registerUser("user2@gmail.com", "user",
+				new UserProfileDetails("n", "b", 0, "a"), new Role("r"));
+		userService.assignTraining(user2.getUserProfileId(), training2);
+		
+		Planning planning1 = new Planning();
+		planning1.setName("planing1");
+		Planning planning2 = new Planning();
+		planning2.setName("planing2");
+		List<Planning> plannings = new ArrayList<Planning>();
+		plannings.add(planning1);
+		plannings.add(planning2);
+		
+		List<Training> trainings = trainingService.getActiveTrainings();
+		
+		//List<Training>, List<Planning>
+		weeklyPlanningService.publishPlannings(trainings, plannings);
+		
+		assertTrue(planning1.getName().compareTo(user1.getActualPlanning.getName()));
+		assertTrue(planning1.getCreationDate().equals(
+				user1.getActualPlanning.getCreationDate()));
+		
+		assertTrue(planning2.getName().compareTo(user2.getActualPlanning.getName()));
+		assertTrue(planning2.getCreationDate().equals(
+				user2.getActualPlanning.getCreationDate()));
 	}
 	
 }

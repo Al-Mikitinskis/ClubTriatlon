@@ -27,7 +27,7 @@ DELETE FROM Training;
 DELETE FROM WeeklyPlanning;
 DELETE FROM UserProfile;
 
--- WeeklyPlanning --------------------------------------------------------
+-- WeeklyPlanning -------------------------------------------------------------
 -- id, name, cDate
 
 INSERT INTO WeeklyPlanning VALUES (1, '2015 - s.1', '2015-01-04');
@@ -45,12 +45,12 @@ INSERT INTO Training VALUES (1, 'training1', 1);
 INSERT INTO Training VALUES (2, 'training2', 1);
 INSERT INTO Training VALUES (3, 'training3', 1);
 INSERT INTO Training VALUES (4, 'Triatlón base', 1);
-INSERT INTO Training VALUES (5, '2015 Peregrinos', 1);
+INSERT INTO Training VALUES (5, 'Carrera base', 1);
 INSERT INTO Training VALUES (6, 'Ciclismo base', 0);
-INSERT INTO Training VALUES (7, 'Carrera base', 1);
+INSERT INTO Training VALUES (7, '2015 Peregrinos', 0);
 INSERT INTO Training VALUES (8, 'Natación base', 0);
 
--- Planning --------------------------------------------------------------
+-- Planning -------------------------------------------------------------------
 -- id, name, cDate, wpId, tId
 
 INSERT INTO Planning (id, name, wpId, tId) VALUES (1, 'planning1', 7, 1);
@@ -68,13 +68,14 @@ INSERT INTO Role VALUES (2, 'Usuario');
 -- Passwords ==> 'admin' = 'BLaNeeniglZgQ' 'user' = 'ABsFuZ3PufkXY'
 
 INSERT INTO UserProfile VALUES 
-(1, 'admin1@triatlon.com', 'BLaNeeniglZgQ', 'Administrador1', '1975/01/23', 601601601, '0049005203650360', 1, 1);
+(1, 'admin1@triatlon.com', 'BLaNeeniglZgQ', 'Administrador1', '1975/01/23', 601601601, '0049005203650360', 1, NULL);
 INSERT INTO UserProfile VALUES 
-(2, 'admin2@triatlon.com', 'BLaNeeniglZgQ', 'Administrador2', '1977/03/19', 633622611, '0049005201177908', 1, 1);
+(2, 'admin2@triatlon.com', 'BLaNeeniglZgQ', 'Administrador2', '1977/03/19', 633622611, '0049005201177908', 1, NULL);
 INSERT INTO UserProfile VALUES 
-(3, 'user1A@gmail.com', 'ABsFuZ3PufkXY', 'Usuario 1A', '1979/07/15', 666000258, '0049005202540258', 2, 1);
+(5, 'user1@gmail.com', 'ABsFuZ3PufkXY', 'Usuario 1', '1983/03/22', 667557447, '0049005200025883', 2, 1);
 INSERT INTO UserProfile VALUES 
-(4, 'user2B@gmail.com', 'ABsFuZ3PufkXY', 'Usuario 2B', '1983/03/22', 666210210, '0049005225747471', 2, 1);
+(3, 'al.mikitinskis@gmail.com', 'ABsFuZ3PufkXY', 'Miki', '1991/02/03', 666000258, '0049005202540258', 2, 4);
 INSERT INTO UserProfile VALUES 
-(5, 'user3C@gmail.com', 'ABsFuZ3PufkXY', 'Usuario 3C', '1991/02/03', 667557447, '0049005200025883', 2, 1);
+(4, 'alejandro.mikitinskis@udc.es', 'ABsFuZ3PufkXY', 'Alejandro', '1991/02/03', 666000258, '0049005202540258', 2, 5);
+
 

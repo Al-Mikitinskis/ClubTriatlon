@@ -75,11 +75,47 @@ public class AdminPlanningWebTest {
 		newWeeklyPlanningLink.click();
 		assertEquals(driver.getCurrentUrl(),
 				"http://localhost:9090/triatlon/admin/plannings/newweeklyplanning");
+		//In the page, initially we must see all active trainings with no assigned plannings
+		String tableText = driver.findElement(By.cssSelector("table.grid")).getText();
+		assertTrue(tableText.contains("training1"));
+		assertTrue(tableText.contains("training2"));
+		assertTrue(tableText.contains("Triatlón base"));
+		assertTrue(tableText.contains("Carrera base"));
 		
 		SeleniumMethods.logout(driver);
 		driver.quit();
 		
 	}
+	
+/*	@Test
+	public void testCreateNewWeeklyPlanning() {
+		
+		WebDriver driver = SeleniumMethods.auntenticateAdmin();
+		// Access to planningweekly view
+		driver.findElement(By.id("menuOptions")).findElement(By.id("planningWeekly")).click();
+		driver.getCurrentUrl();
+		// Access to New Weekly Planning view
+		WebElement newWeeklyPlanningLink = driver.findElement(By.id("newWeeklyPlanning"));
+		assertEquals(newWeeklyPlanningLink.getText(), "+ Nuevo plan semanal");
+		newWeeklyPlanningLink.click();
+		driver.getCurrentUrl();
+		//Write name of week
+		driver.findElement(By.id("weeklyPlaningName")).sendKeys("9");
+		//TODO
+		 * 1.- Seleccionar un plan en nuestro equipo.
+		 * 2.- Pulsar 'Publicar plan' en una celda.
+		 * 3.- Comprobar que 'Fecha de envío' en esa celda es la fecha en la que se hizo la
+		 *     acción (es decir, la actual en este caso).
+		 * 4.- Volver a la página anterior y ver que se creó el plan semanal con el nombre '2015 - s.09'
+		
+		driver.findElement(By.id("weeklyPlaningName")).sendKeys("9");
+		assertEquals(driver.getCurrentUrl(),
+				"http://localhost:9090/triatlon/admin/plannings/newweeklyplanning");
+		
+		SeleniumMethods.logout(driver);
+		driver.quit();
+		
+	}*/
 	
 	@Test
 	public void testWeeklyPlanningDetailsView() {
