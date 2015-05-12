@@ -73,9 +73,9 @@
 	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 
 	<!-- Enable the configuration of transactional behavior based on annotations. -->
-	<!--<tx:annotation-driven transaction-manager="transactionManager" />-->
-	<task:annotation-driven scheduler="scheduler-pool"/>
-	<!--<task:scheduler id="scheduler-pool" pool-size="5"/> -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!--<task:annotation-driven scheduler="scheduler-pool"/>
+	<task:scheduler id="scheduler-pool" pool-size="5"/> -->
 
     <!-- Enable component scanning for defining beans with annotations. -->
     <context:component-scan base-package="es.udc.tfg_es.clubtriatlon.model, 
