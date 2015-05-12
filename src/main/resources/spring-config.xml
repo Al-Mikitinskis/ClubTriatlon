@@ -22,12 +22,15 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:p="http://www.springframework.org/schema/p"
     xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:task="http://www.springframework.org/schema/task"
     xmlns:util="http://www.springframework.org/schema/util"
     xmlns:context="http://www.springframework.org/schema/context"
     xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/task
+        http://www.springframework.org/schema/tx/spring-task.xsd
         http://www.springframework.org/schema/util
         http://www.springframework.org/schema/util/spring-util.xsd
         http://www.springframework.org/schema/context
@@ -70,9 +73,9 @@
 	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 
 	<!-- Enable the configuration of transactional behavior based on annotations. -->
-	<tx:annotation-driven transaction-manager="transactionManager" />
-	<!--<task:annotation-driven scheduler="scheduler-pool"/>
-	<task:scheduler id="scheduler-pool" pool-size="5"/> -->
+	<!--<tx:annotation-driven transaction-manager="transactionManager" />-->
+	<task:annotation-driven scheduler="scheduler-pool"/>
+	<!--<task:scheduler id="scheduler-pool" pool-size="5"/> -->
 
     <!-- Enable component scanning for defining beans with annotations. -->
     <context:component-scan base-package="es.udc.tfg_es.clubtriatlon.model, 
