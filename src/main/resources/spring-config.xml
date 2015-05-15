@@ -39,8 +39,6 @@
 	<!-- Enable usage of @Autowired -->
 	<context:annotation-config/>
 
-	
-
 	<!-- Transaction manager for a single Hibernate SessionFactory  -->
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager"
@@ -49,16 +47,11 @@
 	<!--  For translating native persistence exceptions to Spring's DataAccessException hierarchy -->
 	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 
-	<!-- Enable the configuration of transactional behavior based on annotations. -->
-	<tx:annotation-driven transaction-manager="transactionManager" />
-	<!--<task:annotation-driven scheduler="scheduler-pool"/>-->
-	<!--<task:scheduler id="scheduler-pool" pool-size="1"/>-->
+	<!-- Enable component scanning for defining beans with annotations. -->
+	<context:component-scan base-package="es.udc.tfg_es.clubtriatlon.model, 
+	                                      es.udc.tfg_es.clubtriatlon.service" />
 
-    <!-- Enable component scanning for defining beans with annotations. -->
-    <context:component-scan base-package="es.udc.tfg_es.clubtriatlon.model, 
-                                          es.udc.tfg_es.clubtriatlon.service" />
-
-    <!-- Apache Shiro (http://shiro.apache.org/spring.html) -->
+	<!-- Apache Shiro (http://shiro.apache.org/spring.html) -->
 	<bean id="jdbcRealm" class="org.apache.shiro.realm.jdbc.JdbcRealm">
 		<property name="name" value="jdbcRealm" />
 		<property name="dataSource" ref="dataSource" />
@@ -97,7 +90,8 @@
 	</bean>
 
 	<!-- /Apache Shiro -->
-<beans profile="local">
+
+	<beans profile="local">
 		<!-- Data source -->
 		<bean id="dataSource"
 			class="org.springframework.jndi.JndiObjectFactoryBean"
@@ -112,7 +106,11 @@
 			class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
 			p:dataSource-ref="dataSourceProxy"
 			p:configLocation="classpath:/hibernate.cfg.xml"/>
+
+		<!-- Enable the configuration of transactional behavior based on annotations. -->
+		<tx:annotation-driven transaction-manager="transactionManager" />
 	</beans>
+
 	<beans profile="server">
 	 	<bean class="java.net.URI" id="dbUrl"> 
 	 		<constructor-arg value="#{systemEnvironment['CLUBTRIATLON_DATABASE_URL']}"/>
@@ -133,5 +131,9 @@
 			class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
 			p:dataSource-ref="dataSource"
 			p:configLocation="classpath:/hibernate.cfg.xml"/>
+
+		<!-- Enable the configuration of transactional behavior based on annotations. -->
+		<task:annotation-driven scheduler="scheduler-pool"/>
+		<task:scheduler id="scheduler-pool" pool-size="1"/>
 	</beans>
 </beans>
