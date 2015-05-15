@@ -122,9 +122,9 @@
 		                                        @dbUrl.getPort() + @dbUrl.getPath() }"/>
 	 		<property name="username" value="#{ @dbUrl.getUserInfo().split(':')[0] }"/>
 	 		<property name="password" value="#{ @dbUrl.getUserInfo().split(':')[1] }"/>
-			<property name="initialSize" value="1" />
+			<!-- <property name="initialSize" value="1" />
 			<property name="maxActive" value="5" />
-			<property name="maxIdle" value="2" />
+			<property name="maxIdle" value="2" /> -->
 	 	</bean>
 
 		<!-- Hibernate Session Factory -->
@@ -134,7 +134,7 @@
 			p:configLocation="classpath:/hibernate.cfg.xml"/>
 
 		<!-- Enable the configuration of transactional behavior based on annotations. -->
-		<tx:annotation-driven />
+		<tx:annotation-driven transaction-manager="transactionManager"/>
 		<!--<task:annotation-driven scheduler="scheduler-pool"/>
 		<task:scheduler id="scheduler-pool" pool-size="1"/> -->
 	</beans>
