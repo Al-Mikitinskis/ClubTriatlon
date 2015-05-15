@@ -13,9 +13,9 @@
         <property name="hibernate.use_sql_comments">${hibernate.use_sql_comments}</property>
 
         <!-- JDBC connection pool (use the built-in) -->
-        <property name="hibernate.connection.pool_size">1</property>
+        <!--<property name="hibernate.connection.pool_size">1</property>-->
 	<!-- Enable Hibernate's automatic session context management -->
-        <property name="current_session_context_class">thread</property>
+        <!--<property name="current_session_context_class">thread</property>-->
 
         <mapping class="es.udc.tfg_es.clubtriatlon.model.UserProfile" />
         <mapping class="es.udc.tfg_es.clubtriatlon.model.Role" />
