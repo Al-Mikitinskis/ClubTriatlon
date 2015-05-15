@@ -51,6 +51,9 @@
 	<context:component-scan base-package="es.udc.tfg_es.clubtriatlon.model, 
 	                                      es.udc.tfg_es.clubtriatlon.service" />
 
+	<!-- Enable the configuration of transactional behavior based on annotations. -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
 	<!-- Apache Shiro (http://shiro.apache.org/spring.html) -->
 	<bean id="jdbcRealm" class="org.apache.shiro.realm.jdbc.JdbcRealm">
 		<property name="name" value="jdbcRealm" />
@@ -106,9 +109,6 @@
 			class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
 			p:dataSource-ref="dataSourceProxy"
 			p:configLocation="classpath:/hibernate.cfg.xml"/>
-
-		<!-- Enable the configuration of transactional behavior based on annotations. -->
-		<tx:annotation-driven transaction-manager="transactionManager" />
 	</beans>
 
 	<beans profile="server">
@@ -132,7 +132,6 @@
 			p:dataSource-ref="dataSource"
 			p:configLocation="classpath:/hibernate.cfg.xml"/>
 
-		<!-- Enable the configuration of transactional behavior based on annotations. -->
 		<task:annotation-driven scheduler="scheduler-pool"/>
 		<task:scheduler id="scheduler-pool" pool-size="1"/>
 	</beans>
